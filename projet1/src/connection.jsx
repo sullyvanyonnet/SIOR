@@ -1,4 +1,5 @@
 import React from 'react';
+import './App.css';
 
 class Connection extends React.Component {
 
@@ -36,31 +37,43 @@ class Connection extends React.Component {
   render() {
 
     return (
-      <div className="home">
-        <table>
-            <tr>
-                <td> 
-                    <h1>Connection</h1>
-                </td>
-            </tr>
-            <tr>
-                <td>login :</td>
-                    <td><input type="text" name="login" onChange={this.handlechange}/></td>
-                    <td></td>
+        <div>
+            <div className="titre">
+                <h1>Connection</h1>             
+            </div>
+            <table>
+                <tr>
+
                 </tr>
-            <tr>
-                <td>mot de passe :</td>
-                <td><input type="text" name="password" onChange={this.handlechange}/></td>
-            </tr>
-            <tr>
-               <td>
-                <button className="btn btn-default" onClick={this.enregistrer}>
-                    connection
-                 </button>
-                </td>
-            </tr>
-        </table>
-      </div>
+
+                <tr>
+                    <td>login :</td>
+                        <td><input type="text" name="login" onChange={this.handlechange}/></td>
+                </tr>
+                <tr>
+                    <td>mot de passe :</td>
+                    <td><input type="text" name="password" onChange={this.handlechange}/></td>
+                </tr>
+                <tr>
+                    <td>
+                        <button className="btn btn-default" onClick={this.enregistrer}>
+                            annuler
+                        </button>
+                    </td>
+                    
+                    <td>
+                        <button className="btn btn-default" onClick={this.enregistrer}>
+                            connexion
+                        </button>
+                    </td>
+
+                    
+                </tr>
+            </table>
+        </div>
+
+
+
     );
   }
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import './App.css';
 import Connection from './connection.jsx';
 class App extends Component {
     constructor(props) {
@@ -26,16 +26,24 @@ class App extends Component {
     render() {
         let bouttonHeads ;
         if(this.state.etatConnexion){
-             bouttonHeads = <h3 onClick={this.Connection.bind(this,<p>vous etes deco</p>,0)}>Deconection </h3>  ;  
+             bouttonHeads = <h3 onClick={this.Connection.bind(this,<p>vous etes deco</p>,0)}>Deconexion </h3>  ;  
             this.var = "";
         }else{
-             bouttonHeads =   <h3 onClick={this.Connection.bind(this,<Connection handler = {this.Connection}/>,0)} >connection</h3> ;                   
+             bouttonHeads =   <h3 onClick={this.Connection.bind(this,<Connection handler = {this.Connection}/>,0)} >connexion</h3> ;                   
         }
         return (
             <div className="App">
                 <div className="App-header">
-                    <h2>menu</h2>
-                    {bouttonHeads}
+                    <div className="App-header-Tab">
+                        <table >
+                            <tr>
+                                <td>
+                                    {bouttonHeads}
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
                 </div>
                 <div className="home">
                         {this.state.var}
