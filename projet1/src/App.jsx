@@ -1,38 +1,50 @@
 import React, { Component } from 'react';
-import {
-    BrowserRouter,
-    Link,
-    Route,
-    Switch
-} from 'react-router-dom';
 
-import Home from './Home.jsx';
-import Livre from './Livre.jsx';
-import connection from './connection.jsx';
-
-
+import Connection from './connection.jsx';
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            etatConnexion: 0,      
+            login: "",
+            var: "",
+            bouttonHead: ""
+        }
+        this.Connection = this.Connection.bind(this)
+
+    }
+
+    Connection(test,etat){
+        this.setState({
+           var: test,
+           etatConnexion: etat
+        })   
+
+       // this.forceUpdate()
+    }
+    
     render() {
+        let bouttonHeads ;
+        if(this.state.etatConnexion){
+             bouttonHeads = <h3 onClick={this.Connection.bind(this,<p>vous etes deco</p>,0)}>Deconection </h3>  ;  
+            this.var = "";
+        }else{
+             bouttonHeads =   <h3 onClick={this.Connection.bind(this,<Connection handler = {this.Connection}/>,0)} >connection</h3> ;                   
+        }
         return (
             <div className="App">
                 <div className="App-header">
-                    <h2>Menu</h2>
+                    <h2>menu</h2>
+                    {bouttonHeads}
                 </div>
-                <BrowserRouter basename={process.env.REACT_APP_ROUTER_BASE || ''}>
-                    <div>
-                        <ul className="nav">
-                            <li><Link to="/connection">Connection</Link></li>
-                            <li><Link to="/livres">Gestion des livres</Link></li>
-                        </ul>
-                        <Switch>
-                            <Route path="/connection" component={connection} />
-                            <Route path="/livres" component={Livre} />
-                        </Switch>
-                    </div>
-                </BrowserRouter>
+                <div className="home">
+                        {this.state.var}
+                </div>
+
             </div>
         );
     }
+
 }
 
 export default App;
