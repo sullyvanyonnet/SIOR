@@ -27,10 +27,6 @@ class Connection extends React.Component {
 
     annuler(){
         this.props.handler("",0)
-        /*axios.post('ServletConnection', this.state.login , this.state.password)
-            .then(res => {
-                console.log(JSON.stringify(res.data));
-            })*/
   }
 
   handlechange(event){
