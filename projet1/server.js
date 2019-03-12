@@ -3,8 +3,8 @@ var express = require('express');
 let mongoose = require('mongoose');
 let multer = require('multer');
 
-let mongodb = require("./CRUDMongodb");
-let mariadb = require("./CRUDMariadb");
+let mongodb = require("./CRUDs/CRUDMongodb");
+let mariadb = require("./CRUDs/CRUDMariadb");
 
 let Schema = mongoose.Schema;
 let app = express();
