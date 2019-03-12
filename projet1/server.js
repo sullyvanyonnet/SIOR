@@ -61,7 +61,13 @@ var server = app.listen(port, function () {
 
 //Fonctions additionnelles :
 
-app.get('/connect', (req, res) => {
+app.post('/api/test', (req, res) => {
+    var login = req.body.login;
+    var mdp = req.body.password;
+    res.send(login + password);
+});
+
+app.get('/api/connect', (req, res) => {
   
 	const login = req.query.login;
 	const password = req.query.password || 'coucou';
@@ -85,7 +91,7 @@ function connectCallback(res, result) {
 		res.send(JSON.stringify({ greeting: result[0].cli_id }));
 }
 
-app.get('/getAllVoyages', function (req, res) {
+app.get('/api/getAllVoyages', function (req, res) {
     console.log("/getAllVoyages");
     let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr']
     let sql = "select * from Voyage, Photo_voyage where Voyage.voy_id = Photo_voyage.voy_id;"
@@ -98,7 +104,7 @@ function getAllCoursCallback(res, result) {
     res.send(result);
 }
 
-app.get('/getCommentairesVoyage', function (req, res) {
+app.get('/api/getCommentairesVoyage', function (req, res) {
     console.log("/getCommentairesVoyage");
     let voy_id = req.query.voy_id;
     let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr']
