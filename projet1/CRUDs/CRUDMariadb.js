@@ -12,13 +12,11 @@ function connect (user, mdp, base, hote){
 //module.exports = connect;
 
 module.exports = {
-	executeSelect : function (db, sql, res, result, func){
+	executeSelect : function (db, sql, res, callback){
 			connect(db[0], db[1], db[2], db[3]).then(conn => {	
 				conn.query(sql)
 					.then((rows) => {
-						//console.log(rows);
-						result = rows;
-						func(res, result);
+						callback(res, rows);
 					})
 					.catch(err => {
 						console.log("requete echouée: " + err);

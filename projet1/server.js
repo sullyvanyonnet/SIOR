@@ -1,17 +1,24 @@
 var fs = require('fs')
 var express = require('express');
-var app = express();
-var port = 9000;
+let mongoose = require('mongoose');
+let multer = require('multer');
 
-var axios = require('axios');
-var util = require('util')
+let mongodb = require("./CRUDMongodb");
+let mariadb = require("./CRUDMariadb");
 
-var bodyParser = require('body-parser');
+let Schema = mongoose.Schema;
+let app = express();
+let port = 9000;
+
+let axios = require('axios');
+let util = require('util')
+
+let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // var fic_index = require('os').homedir() + "/tmp_tomcat2/test_reactjs5/build/index.html";
-var fic_index = process.cwd() + "/build/index.html";
+let fic_index = process.cwd() + "/build/index.html";
 
 if (!fs.existsSync(fic_index)) {
     console.log(fic_index + " not found");
@@ -54,13 +61,58 @@ var server = app.listen(port, function () {
 
 //Fonctions additionnelles :
 
-app.get('/getAllVoyages', function (req, res) {
-    console.log("/getAllVoyages");
-    
-    
+app.get('/connect', (req, res) => {
+  
+	const login = req.query.login;
+	const password = req.query.password || 'coucou';
+  
+	let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr'];
+  
+	let result;
+	let sql = `SELECT count(*) as count, cli_id FROM client 
+		WHERE cli_login ='` + login + `' and cli_mdp = PASSWORD('` + password + `');`
+	MariaDB.executeSelect(db, sql, res, result, connectCallback);
+  
+
 });
 
+function connectCallback(res, result) {
 
+	res.setHeader('Content-Type', 'application/json');
+	if (result[0].count == 0)
+		res.send(JSON.stringify({ greeting: -1 }));
+	else
+		res.send(JSON.stringify({ greeting: result[0].cli_id }));
+}
+
+app.get('/getAllVoyages', function (req, res) {
+    console.log("/getAllVoyages");
+    let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr']
+    let sql = "select * from Voyage, Photo_voyage where Voyage.voy_id = Photo_voyage.voy_id;"
+    mariadb.executeSelect(db, sql, res, getAllCoursCallback);
+});
+
+function getAllCoursCallback(res, result) {
+	console.log(result);
+
+    res.send(result);
+}
+
+app.get('/getCommentairesVoyage', function (req, res) {
+    console.log("/getCommentairesVoyage");
+    let voy_id = req.query.voy_id;
+    let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr']
+    let sql = `select * from Commentaire, Voyage 
+        where Voyage.voy_id = Commentaire.voy_id
+        and Commentaire.voy_id = ` + voy_id + `;`
+        
+    mariadb.executeSelect(db, sql, res, getCommentairesVoyageCallback);
+});
+
+function getCommentairesVoyageCallback(res, result) {
+	console.log(result);
+    res.send(result);
+}
 
 
 

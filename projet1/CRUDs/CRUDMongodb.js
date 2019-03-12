@@ -7,14 +7,14 @@ module.exports = class MongoDB {
 		this.hote = hote;
 	}
 	
-	executeSelect(col, rqt, callback) {
+	executeSelect(col, rqt, res, callback) {
 		console.log(rqt);
 		let base = this.base;
 		MongoClient.connect("mongodb://"+this.hote, {useNewUrlParser: true}, function(error, client) {
 			if (error) throw error;
 			var db = client.db(base);
 			db.collection(col).find(rqt, {voy_images:true}).toArray(function(err, items) {
-				 return callback(items);
+				 return callback(items, res);
              });
 			 client.close();
 		});
