@@ -50,3 +50,27 @@ app.post('*', function (req, res) {
 var server = app.listen(port, function () {
     console.log('Express server listening on port ' + port);
 });
+
+
+//Fonctions additionnelles :
+
+app.get('/getAllVoyages', function (req, res) {
+    console.log("/getAllVoyages");
+    
+    
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
