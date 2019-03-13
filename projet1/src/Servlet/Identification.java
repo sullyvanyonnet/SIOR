@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import manager.Manager;
+import manager.User;
 
 /**
  * Servlet implementation class Accueil
@@ -56,15 +57,15 @@ public class Identification extends HttpServlet {
 		// et on l'enregistre en session
 		try {
 			HttpURLConnectionExample con = new HttpURLConnectionExample();
-			
-			String ident = request.getParameter("login");
-			String password = request.getParameter("password");
+			User u = new ObjectMapper().readValue(request.getReader(), User.class);
+			String ident = u.getLogin();
+			String password = u.getPassword();
 			
 			ServletOutputStream out = response.getOutputStream();
 			ObjectMapper objectMapper = new ObjectMapper();
 			
 			out.write(objectMapper.writeValueAsBytes(
-					con.sendGet("http://localhost:9000/api/connect?login=" + ident + "&password=" + password)));
+					con.sendGet("http://localhost:9000/api/connect?login=" + ident+ "&password=" + password)));
 			out.close();
 			
 		}catch( Exception E) {
