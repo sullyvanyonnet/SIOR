@@ -18,8 +18,16 @@ class Connection extends React.Component {
     }
   enregistrer(){
 
-        
-        axios.post('Identification', this.state.login , this.state.password)
+         var data = {
+        'login': this.state.login,
+        'password': this.state.password
+        }
+
+        var headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'JWT fefege...' 
+        }
+        axios.post('Identification', data,headers )
             .then(res => {
                 console.log("je suis dans react" + JSON.stringify(res.data));
                 this.props.handler(<h2>bonjour {this.state.login} et ton mdp est {this.state.password}</h2>,1)
