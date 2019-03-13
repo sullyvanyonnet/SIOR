@@ -2,6 +2,7 @@ package Servlet;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
+import java.net.URL;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -60,7 +61,12 @@ public class Identification extends HttpServlet {
 			ServletOutputStream out = response.getOutputStream();
 			ObjectMapper objectMapper = new ObjectMapper();
 			
-			out.write(objectMapper.writeValueAsBytes(SendUrl.executeGet("127.0.0.1/api/test", "login=toto&password=tata")));
+			HttpURLConnection con = (HttpURLConnection) new URL("http://localhost:9000/api/connect").openConnection();
+			con.setRequestMethod("POST");
+			con.getOutputStream().write("LOGIN".getBytes("UTF-8"));
+			System.out.println(con.getInputStream());
+			
+			//out.write(objectMapper.writeValueAsBytes(SendUrl.executePost("http://127.0.0.1:9000/api/connect", "")));
 			out.close();
 		}catch( Exception E) {
 			
