@@ -66,7 +66,7 @@ app.post('/api/test', (req, res) => {
     var mdp = req.body.password;
     res.send(login + password);
 });
-
+/*
 app.get('/api/connect', (req, res) => {
   
 	const login = req.query.login;
@@ -80,10 +80,25 @@ app.get('/api/connect', (req, res) => {
   
 
 });
+*/
+app.post('/api/connect', (req, res) => {
+  
+	const login = req.body.login;
+	const password = req.body.password || 'coucou';
+  
+    console.log(login + password);
+	let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr'];
+  
+	let sql = `SELECT count(*) as count, cli_id FROM Client 
+		WHERE cli_login ='` + login + `' and cli_mdp = PASSWORD('` + password + `');`
+	MariaDB.executeSelect(db, sql, res, connectCallback);
+  
+
+});
 
 function connectCallback(res, result) {
 
-    console.log(result);
+    //console.log(result);
 	res.setHeader('Content-Type', 'application/json');
 	if (result[0].count == 0)
 		res.send(JSON.stringify({ greeting: -1 }));
