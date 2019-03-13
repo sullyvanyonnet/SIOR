@@ -4,7 +4,7 @@ let mongoose = require('mongoose');
 let multer = require('multer');
 
 let mongodb = require("./CRUDs/CRUDMongodb");
-let mariadb = require("./CRUDs/CRUDMariadb");
+let MariaDB = require("./CRUDs/CRUDMariadb");
 
 let Schema = mongoose.Schema;
 let app = express();
@@ -27,7 +27,7 @@ if (!fs.existsSync(fic_index)) {
 
 app.use(express.static('build'));
 // pour que node puisse fournir les fichiers contenus dans build
-
+/*
 app.get('*', function (req, res) {
     console.log("/*");
     res.sendFile(fic_index);
@@ -47,7 +47,7 @@ app.post('*', function (req, res) {
             })
 
 });
-
+*/
 
 
 
@@ -74,16 +74,16 @@ app.get('/api/connect', (req, res) => {
   
 	let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr'];
   
-	let result;
-	let sql = `SELECT count(*) as count, cli_id FROM client 
+	let sql = `SELECT count(*) as count, cli_id FROM Client 
 		WHERE cli_login ='` + login + `' and cli_mdp = PASSWORD('` + password + `');`
-	MariaDB.executeSelect(db, sql, res, result, connectCallback);
+	MariaDB.executeSelect(db, sql, res, connectCallback);
   
 
 });
 
 function connectCallback(res, result) {
 
+    console.log(result);
 	res.setHeader('Content-Type', 'application/json');
 	if (result[0].count == 0)
 		res.send(JSON.stringify({ greeting: -1 }));
