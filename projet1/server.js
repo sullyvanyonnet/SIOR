@@ -26,6 +26,18 @@ if (!fs.existsSync(fic_index)) {
 
 
 app.use(express.static('build'));
+
+
+
+
+
+// lancement du serveur
+
+var server = app.listen(port, function () {
+    console.log('Express server listening on port ' + port);
+});
+
+
 // pour que node puisse fournir les fichiers contenus dans build
 /*
 app.get('*', function (req, res) {
@@ -50,33 +62,18 @@ app.post('*', function (req, res) {
 */
 
 
-
-
-// lancement du serveur
-
-var server = app.listen(port, function () {
-    console.log('Express server listening on port ' + port);
-});
-
-
 //Fonctions additionnelles :
 
-app.post('/api/test', (req, res) => {
-    var login = req.body.login;
-    var mdp = req.body.password;
-    res.send(login + password);
-});
-
-/*
+/* Fonction CURL pour envoyer une requete POST au serveur : 
 curl -X POST -H 'Content-Type: application/json' -d '{"login": "coco", "password": "coco"}' http://localhost:9000/api/connect
-
-
 */
+
 app.get('/api/connect', (req, res) => {
   
 	const login = req.query.login;
-	const password = req.query.password || 'coucou';
+	const password = req.query.password;
   
+    Console.log(login + password);
 	let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr'];
   
 	let sql = `SELECT count(*) as count, cli_id FROM Client 
@@ -84,50 +81,43 @@ app.get('/api/connect', (req, res) => {
 
     console.log(sql);
 	MariaDB.executeSelect(db, sql, res, connectCallback);
-  
-
-});
-
-app.post('/api/connect', (req, res) => {
-  
-	const login = req.body.login;
-	const password = req.body.password || 'coucou';
-  
-	let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr'];
-  
-	let sql = `SELECT count(*) as count, cli_id FROM Client 
-        WHERE cli_login ='` + login + `' and cli_mdp = PASSWORD('` + password + `');`
-
-    console.log(sql);
-	MariaDB.executeSelect(db, sql, res, connectCallback);
-  
-
 });
 
 function connectCallback(res, result) {
 
     console.log(result);
 	res.setHeader('Content-Type', 'application/json');
-	if (result[0].count == 0)
+	if (result[0].count == 0) {
 		res.send(JSON.stringify({ greeting: -1 }));
-	else
+    }
+	else {
 		res.send(JSON.stringify({ greeting: result[0].cli_id }));
+    }
 }
+
 
 app.get('/api/getAllVoyages', function (req, res) {
     console.log("/getAllVoyages");
     let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr']
-    let sql = "select * from Voyage, Photo_voyage where Voyage.voy_id = Photo_voyage.voy_id;"
-    mariadb.executeSelect(db, sql, res, getAllCoursCallback);
+    let sql = `select Voyage.voy_id, voy_nom, voy_debut, voy_fin, pho_id, pho_chemin 
+                from Voyage, Photo_voyage 
+                where Voyage.voy_id = Photo_voyage.voy_id 
+                and pho_id = (select min(pho_id) 
+                                from Photo_voyage as f 
+                                where f.voy_id = Voyage.voy_id)`
+
+    console.log(sql);
+    MariaDB.executeSelect(db, sql, res, getAllVoyagesCallback);
 });
 
-function getAllCoursCallback(res, result) {
+function getAllVoyagesCallback(res, result) {
 	console.log(result);
 
     res.send(result);
 }
 
-app.get('/api/getCommentairesVoyage', function (req, res) {
+
+app.get('/api/getVoyage', function (req, res) {
     console.log("/getCommentairesVoyage");
     let voy_id = req.query.voy_id;
     let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr']
@@ -135,10 +125,11 @@ app.get('/api/getCommentairesVoyage', function (req, res) {
         where Voyage.voy_id = Commentaire.voy_id
         and Commentaire.voy_id = ` + voy_id + `;`
         
-    mariadb.executeSelect(db, sql, res, getCommentairesVoyageCallback);
+    console.log(sql);
+    MariaDB.executeSelect(db, sql, res, getCommentairesVoyageCallback);
 });
 
-function getCommentairesVoyageCallback(res, result) {
+function getVoyageCallback(res, result) {
 	console.log(result);
     res.send(result);
 }
