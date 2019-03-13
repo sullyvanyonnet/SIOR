@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-
+import axios from 'axios';
 class Connection extends React.Component {
 
     constructor(props) {
@@ -18,11 +18,12 @@ class Connection extends React.Component {
     }
   enregistrer(){
 
-        this.props.handler(<h2>bonjour {this.state.login} et ton mdp est {this.state.password}</h2>,1)
-        /*axios.post('ServletConnection', this.state.login , this.state.password)
+        
+        axios.post('Identification', this.state.login , this.state.password)
             .then(res => {
-                console.log(JSON.stringify(res.data));
-            })*/
+                console.log("je suis dans react" + JSON.stringify(res.data));
+                this.props.handler(<h2>bonjour {this.state.login} et ton mdp est {this.state.password}</h2>,1)
+            })
   }
 
     annuler(){

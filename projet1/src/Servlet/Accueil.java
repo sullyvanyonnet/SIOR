@@ -1,4 +1,4 @@
-package servlet;
+package Servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -28,9 +28,9 @@ public class Accueil extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		request.setAttribute("titre", "Accueil");
-		request.setAttribute("contenu", "/WEB-INF/accueil.jsp");
+		request.setAttribute("contenu", "/WEB-INF/index.html");
 		request.getServletContext().getRequestDispatcher(
-				"/WEB-INF/modele/modele.jsp").
+				"/index.jsp").
 					forward(request, response);
 	}
 

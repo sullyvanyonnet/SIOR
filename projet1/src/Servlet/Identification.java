@@ -1,11 +1,16 @@
-package servlet;
+package Servlet;
 
 import java.io.IOException;
+import java.net.HttpURLConnection;
+
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import manager.Manager;
 
@@ -31,9 +36,9 @@ public class Identification extends HttpServlet {
 
 		
 		request.setAttribute("titre", "Identification");
-		request.setAttribute("contenu", "/WEB-INF/identification.jsp");
+		request.setAttribute("contenu", "/index.html");
 		request.getServletContext().getRequestDispatcher(
-				"/WEB-INF/modele/modele.jsp").
+				"/index.html").
 					forward(request, response);
 	}
 
@@ -48,27 +53,19 @@ public class Identification extends HttpServlet {
 		// si non null : on a l'objet
 		// si null : on instancie un objet Manager
 		// et on l'enregistre en session
-
-		String ident = request.getParameter("ident");
-		if (ident == null) ident = "";
-		
-
-		if (ident.equals("ubo")) {
-			// succès identification
-			manager.setIdentifie(true);
-			manager.setIdent(ident);
+		try {
+			String ident = request.getParameter("login");
+			String password = request.getParameter("password");
 			
-			request.getSession().setAttribute
-				("mess", "Succcès identification");
-			response.sendRedirect("Accueil");
-			return;
+			ServletOutputStream out = response.getOutputStream();
+			ObjectMapper objectMapper = new ObjectMapper();
+			
+			out.write(objectMapper.writeValueAsBytes(SendUrl.executeGet("127.0.0.1/api/test", "login=toto&password=tata")));
+			out.close();
+		}catch( Exception E) {
+			
 		}
-		else {
-			manager.setIdentifie(false);
-			manager.setIdent(ident);
-			doGet(request,response);
-		}
-	
+
 	}
 
 }
