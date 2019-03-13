@@ -68,7 +68,8 @@ app.post('/api/test', (req, res) => {
 });
 
 /*
-curl -X POST -H 'Content-Tyn/json' -d '{"login": "coco", "password": "coco"}' http://localhost:9000/api/connect
+curl -X POST -H 'Content-Type: application/json' -d '{"login": "coco", "password": "coco"}' http://localhost:9000/api/connect
+
 
 */
 app.get('/api/connect', (req, res) => {

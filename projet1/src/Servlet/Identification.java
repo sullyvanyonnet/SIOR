@@ -1,8 +1,8 @@
 package Servlet;
 
 import java.io.IOException;
+
 import java.net.HttpURLConnection;
-import java.net.URL;
 
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -55,19 +55,18 @@ public class Identification extends HttpServlet {
 		// si null : on instancie un objet Manager
 		// et on l'enregistre en session
 		try {
+			HttpURLConnectionExample con = new HttpURLConnectionExample();
+			
 			String ident = request.getParameter("login");
 			String password = request.getParameter("password");
 			
 			ServletOutputStream out = response.getOutputStream();
 			ObjectMapper objectMapper = new ObjectMapper();
 			
-			HttpURLConnection con = (HttpURLConnection) new URL("http://localhost:9000/api/connect").openConnection();
-			con.setRequestMethod("POST");
-			con.getOutputStream().write("LOGIN".getBytes("UTF-8"));
-			System.out.println(con.getInputStream());
-			
-			//out.write(objectMapper.writeValueAsBytes(SendUrl.executePost("http://127.0.0.1:9000/api/connect", "")));
+			out.write(objectMapper.writeValueAsBytes(
+					con.sendGet("http://localhost:9000/api/connect?login=" + ident + "&password=" + password)));
 			out.close();
+			
 		}catch( Exception E) {
 			
 		}
