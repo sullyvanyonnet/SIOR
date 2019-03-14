@@ -29,38 +29,11 @@ if (!fs.existsSync(fic_index)) {
 app.use(express.static('build'));
 
 
-
-
-
 // lancement du serveur
 
 var server = app.listen(port, function () {
     console.log('Express server listening on port ' + port);
 });
-
-
-// pour que node puisse fournir les fichiers contenus dans build
-/*
-app.get('*', function (req, res) {
-    console.log("/*");
-    res.sendFile(fic_index);
-});
-
-app.post('*', function (req, res) {
-
-    //console.log("/test "+util.inspect(req));
-    console.log('param = ' + JSON.stringify(req.body));
-    //res.send({ nom: 'aaaa' });
-
-           axios.post('http://localhost:8080/test_reactjs5_tomcat/'+req.url, 
-            req.body)
-            .then(res2 => {
-                console.log(JSON.stringify(res2.data));
-                res.send(res2.data);
-            })
-
-});
-*/
 
 
 //Fonctions additionnelles :
@@ -70,13 +43,12 @@ curl -X POST -H 'Content-Type: application/json' -d '{"login": "coco", "password
 */
 
 app.get('/api/connect', (req, res) => {
-    console.log('/api/connect');
+    console.log('/connect');
   
 	const login = req.query.login;
 	const password = req.query.password;
   
     console.log(login + password);
-	//let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr'];
   
 	let sql = `SELECT count(*) as count, cli_id FROM Client 
         WHERE cli_login ='` + login + `' and cli_mdp = PASSWORD('` + password + `');`
@@ -87,7 +59,6 @@ app.get('/api/connect', (req, res) => {
 
 function connectCallback(res, result) {
 
-    console.log(result);
 	res.setHeader('Content-Type', 'application/json');
 	if (result[0].count == 0) {
 		res.send(JSON.stringify({ greeting: -1 }));
@@ -99,13 +70,12 @@ function connectCallback(res, result) {
 
 
 app.get('/api/inscription', (req, res) => {
-    console.log('/api/inscription');
+    console.log('/inscription');
   
 	const login = req.query.login;
 	const password = req.query.password;
   
     console.log(login + password);
-	//let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr'];
   
     let sql = `INSERT INTO Client(cli_login, cli_mdp) VALUES ('` + login + `', PASSWORD('` + password + `'))`
     
@@ -119,16 +89,22 @@ app.get('/api/inscription', (req, res) => {
 function inscriptionCallback(res, result) {
 
     console.log(result);
-	res.setHeader('Content-Type', 'application/json');
-	res.send(JSON.stringify(result));
+    res.setHeader('Content-Type', 'application/json');
+    
+    if(result == null){
+	    res.send(JSON.stringify({"affectedRows":0}));
+    } else {
+	    res.send(JSON.stringify(result));
+    }
+
+    console.log(result);
+
 }
 
 
 app.get('/api/getAllVoyages', function (req, res) {
-    console.log('/api/getAllVoyages');
+    console.log('/getAllVoyages');
 
-    console.log("/getAllVoyages");
-    //let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr']
     let sql = `select Voyage.voy_id, voy_nom, voy_debut, voy_fin, pho_id, pho_chemin 
                 from Voyage, Photo_voyage 
                 where Voyage.voy_id = Photo_voyage.voy_id 
@@ -148,10 +124,9 @@ function getAllVoyagesCallback(res, result) {
 
 
 app.get('/api/getVoyage', function (req, res) {
-    console.log('/api/getVoyage');
+    console.log('/getVoyage');
 
     let voy_id = req.query.voy_id;
-    //let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr']
     let sql = `select * from Commentaire, Voyage 
         where Voyage.voy_id = Commentaire.voy_id
         and Commentaire.voy_id = ` + voy_id + `;`
