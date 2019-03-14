@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import './App.css';
 import Connection from './connection.jsx';
 import Inscription from './inscription.jsx';
-import AfficheVoyages from './AfficheVoyages.jsx';
-let ReactBsTable = require('react-bootstrap-table');
-var BootstrapTable = ReactBsTable.BootstrapTable;
-var TableHeaderColumn = ReactBsTable.TableHeaderColumn;
+//import AfficheVoyages from './AfficheVoyages.jsx';
+
+import UnVoyage from './unVoyage.jsx';
+
 
 class App extends Component {
     constructor(props) {
@@ -82,7 +82,34 @@ class App extends Component {
                     {this.state.MessageRetour}
                 </div>
                 <div className="ListVoyage">
-                    <AfficheVoyages handler={this.AfficheVoyages} />
+
+                    <UnVoyage 
+                        voyageId="1" 
+                        titre= "Le debut d'un longt voyage" 
+                        dateDebut= "24/10/1996" 
+                        dateFin= "24/10/2000"
+                        Text= "blablablablaaaaaaaaa"  
+                        IdPhoto= "1"
+                        CheminPhoto= "./Kings-Landing-game-of-thrones-20412877-1920-1080.jpg"
+                    />
+                    <UnVoyage 
+                        voyageId="1" 
+                        titre= "Le debut d'un longt voyage" 
+                        dateDebut= "24/10/1996" 
+                        dateFin= "24/10/2000"
+                        Text= "blablablablaaaaaaaaa"  
+                        IdPhoto= "1"
+                        CheminPhoto= "./Kings-Landing-game-of-thrones-20412877-1920-1080.jpg"
+                    />
+                    <UnVoyage 
+                        voyageId="1" 
+                        titre= "Le debut d'un longt voyage" 
+                        dateDebut= "24/10/1996" 
+                        dateFin= "24/10/2000"
+                        Text= "blablablablaaaaaaaaa"  
+                        IdPhoto= "1"
+                        CheminPhoto= "./Kings-Landing-game-of-thrones-20412877-1920-1080.jpg"
+                    />
                 </div>
             </div>
         );
