@@ -19,6 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // var fic_index = require('os').homedir() + "/tmp_tomcat2/test_reactjs5/build/index.html";
 let fic_index = process.cwd() + "/build/index.html";
+let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr'];
 
 if (!fs.existsSync(fic_index)) {
     console.log(fic_index + " not found");
@@ -74,7 +75,7 @@ app.get('/api/connect', (req, res) => {
 	const password = req.query.password;
   
     console.log(login + password);
-	let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr'];
+	//let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr'];
   
 	let sql = `SELECT count(*) as count, cli_id FROM Client 
         WHERE cli_login ='` + login + `' and cli_mdp = PASSWORD('` + password + `');`
@@ -96,9 +97,34 @@ function connectCallback(res, result) {
 }
 
 
+app.get('/api/inscription', (req, res) => {
+  
+	const login = req.query.login;
+	const password = req.query.password;
+  
+    console.log(login + password);
+	//let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr'];
+  
+    let sql = `INSERT INTO Client(cli_login, cli_mdp) VALUES ('` + login + `', PASSWORD('` + password + `'))`
+    
+    MariaDB.executeUpdate(db, sql, res, inscriptionCallback);
+    
+    
+
+});
+
+
+function inscriptionCallback(res, result) {
+
+    console.log(result);
+	res.setHeader('Content-Type', 'application/json');
+	res.send(JSON.stringify(result));
+}
+
+
 app.get('/api/getAllVoyages', function (req, res) {
     console.log("/getAllVoyages");
-    let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr']
+    //let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr']
     let sql = `select Voyage.voy_id, voy_nom, voy_debut, voy_fin, pho_id, pho_chemin 
                 from Voyage, Photo_voyage 
                 where Voyage.voy_id = Photo_voyage.voy_id 
@@ -120,7 +146,7 @@ function getAllVoyagesCallback(res, result) {
 app.get('/api/getVoyage', function (req, res) {
     console.log("/getCommentairesVoyage");
     let voy_id = req.query.voy_id;
-    let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr']
+    //let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr']
     let sql = `select * from Commentaire, Voyage 
         where Voyage.voy_id = Commentaire.voy_id
         and Commentaire.voy_id = ` + voy_id + `;`
