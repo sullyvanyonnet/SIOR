@@ -7,14 +7,24 @@ class Connection extends React.Component {
         super(props);
         this.state = {
             password: "",      
-            login: ""
+            login: "",
+            Erreur: ""
         }
         this.enregistrer = this.enregistrer.bind(this)
         this.annuler = this.annuler.bind(this)
 
         this.handlechange = this.handlechange.bind(this)
+        this.TestConnexion = this.TestConnexion.bind(this)
 
 
+    }
+    TestConnexion(ID){
+        console.log("dans test"+ID); 
+        if ( ID > 0){
+           this.props.handler(<h2>bonjour {this.state.login}</h2>,1) ;
+        }else{
+            this.setState({Erreur:<div className="response" style={{color: 'red'}}><h2> Les identifiants sont incorrects .</h2></div>});
+        }
     }
   enregistrer(){
 
@@ -23,14 +33,12 @@ class Connection extends React.Component {
         'password': this.state.password
         }
 
-        var headers = {
-            'Content-Type': 'application/json',
-            'Authorization': 'JWT fefege...' 
-        }
-        axios.post('Identification', data,headers )
+
+        axios.post('Identification', data )
             .then(res => {
-                console.log("je suis dans react" + JSON.stringify(res.data));
-                this.props.handler(<h2>bonjour {this.state.login} et ton mdp est {this.state.password}</h2>,1)
+                console.log("dans axios"+res.getWriter());
+                console.log("dans axios sstate"+res.data);
+                this.TestConnexion(res.data.greeting);
             })
   }
 
@@ -57,9 +65,7 @@ class Connection extends React.Component {
                 <h1>Connection</h1>             
             </div>
             <table>
-                <tr>
-
-                </tr>
+                
 
                 <tr>
                     <td>login :</td>
@@ -80,9 +86,11 @@ class Connection extends React.Component {
                         <button className="btn btn-default" onClick={this.enregistrer}>
                             connexion
                         </button>
-                    </td>
+                    </td> 
+                </tr>
 
-                    
+                <tr>
+                    {this.Erreur}
                 </tr>
             </table>
         </div>
