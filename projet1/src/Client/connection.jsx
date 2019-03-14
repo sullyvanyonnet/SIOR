@@ -21,7 +21,7 @@ class Connection extends React.Component {
     TestConnexion(ID){
         console.log("dans test"+ID); 
         if ( ID > 0){
-           this.props.handler(<h2>bonjour {this.state.login}</h2>,1) ;
+           this.props.handler(<h2>bonjour {this.state.login}</h2>,1, this.state.login) ;
         }else{
             this.setState({Erreur:<div className="response" style={{color: 'red'}}><h2> Les identifiants sont incorrects .</h2></div>});
             //this.forceUpdate()

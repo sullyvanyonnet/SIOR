@@ -2,56 +2,55 @@ import React, { Component } from 'react';
 import './App.css';
 import Connection from './connection.jsx';
 import Inscription from './inscription.jsx';
+
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
             etatConnexion: 0,      
             login: "",
-            var: "",
+            MessageRetour: "",
             bouttonHead: "",
-            bonjoursUser:""
+            voyage:""
         }
         this.Connection = this.Connection.bind(this)
         this.Inscription = this.Inscription.bind(this)
 
     }
 
-    Connection(test,etat){
+    Connection(test,etat,nom){
         this.setState({
-           var: test,
-           //bonjoursUser: test,
-           etatConnexion: etat
+           MessageRetour: test,
+           etatConnexion: etat,
+           login: nom
         })   
-
        // this.forceUpdate()
     }
 
     Inscription(test,etat){
         this.setState({
-           var: test,
+           MessageRetour: test,
            etatConnexion: etat
         })   
-
-       // this.forceUpdate()
     }
     
     render() {
-        let bouttonConnexion ;
-        if(this.state.etatConnexion){
-             bouttonConnexion = <h3 onClick={this.Connection.bind(this,<p>vous etes deco</p>,0)}>Deconnexion </h3>  ;  
-            this.var = "";
-        }else{
-             bouttonConnexion =   <h3 onClick={this.Connection.bind(this,<Connection handler = {this.Connection}/>,0)} >Connexion</h3> ;                   
-        }
+        let bouttonConnexion;
+        let bouttonInscription;
+        let bonjoursUser;
 
-        let bouttonInscription ;
-        if(this.state.etatConnexion){
-             bouttonInscription = <h3 onClick={this.Inscription.bind(this,<p>vous etes deco</p>,0)}>Deconnexion </h3>  ;  
-            this.var = "";
-        }else{
-             bouttonInscription = <h3 onClick={this.Inscription.bind(this,<Inscription handler = {this.Inscription}/>,0)} >Inscription</h3> ;                   
-        }
+		if(this.state.etatConnexion){
+				bouttonConnexion = <h3 onClick={this.Connection.bind(this,<p>vous etes deco</p>,0)}>Deconnexion </h3>;
+				bouttonInscription = "";	
+				bonjoursUser = <h3>Bonjour, {this.state.login} </h3>;
+			
+		}else{
+			
+                bouttonConnexion = <h3 onClick={this.Connection.bind(this,<Connection handler = {this.Connection}/>,0)} >Connexion</h3>;
+                bouttonInscription =   <h3 onClick={this.Inscription.bind(this,<Inscription handler = {this.Inscription}/>,0)} >Inscription</h3>;
+                bonjoursUser =""; 
+		    
+		}
 
         return (
             <div className="App">
@@ -60,14 +59,12 @@ class App extends Component {
                         <table >
                             <tr>
                                 <td>
-                                    {this.state.bonjoursUser}
+                                    {bonjoursUser}
                                 </td>
                                 <td>
                                     {bouttonConnexion}
                                 </td>
-                                <td>
-                                    /
-                                </td>
+
                                 <td>
                                     {bouttonInscription}
                                 </td>
@@ -76,10 +73,12 @@ class App extends Component {
                         </table>
                     </div>
                 </div>
-                <div className="home">
-                        {this.state.var}
+                <div className="Reponse">
+                        {this.state.MessageRetour}
                 </div>
-
+                <div className="ListVoyage">
+                        {this.state.voyage}
+                </div>
             </div>
         );
     }

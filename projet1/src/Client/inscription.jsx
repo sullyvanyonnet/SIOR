@@ -21,7 +21,7 @@ class Inscription extends React.Component {
     TestInscription(ID) {
         console.log("dans test" + ID);
         if (ID > 0) {
-            this.props.handler(<h2>Bienvenue {this.state.login}!</h2>, 1);
+            this.props.handler(<h2>Inscription de {this.state.login} reussit !</h2>,0);
         } else {
             this.setState({ Erreur: <div className="response" style={{ color: 'red' }}><h2> Probleme lors de l'Inscription.</h2></div> });
             //this.forceUpdate()
