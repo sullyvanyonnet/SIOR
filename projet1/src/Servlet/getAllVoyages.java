@@ -18,7 +18,7 @@ import manager.Manager;
 /**
  * Servlet implementation class Accueil
  */
-@WebServlet("/Identification")
+@WebServlet("/getAllVoyages")
 public class getAllVoyages extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
