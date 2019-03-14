@@ -29,7 +29,7 @@ class Connection extends React.Component {
     }
 
     enregistrer() {
-        if (!(this.state.password.equals(this.state.verifPassword))) {
+        if ( !(this.state.password.toString() === this.state.verifPassword.toString()) ) {
             this.setState({ Erreur: <div className="response" style={{ color: 'red' }}><h2> Les mots de passe sont différents.</h2></div> });
         } else {
             var data = {

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Connection from './connection.jsx';
+import Inscription from './inscription.jsx';
 class App extends Component {
     constructor(props) {
         super(props);
@@ -49,7 +50,7 @@ class App extends Component {
              bouttonInscription = <h3 onClick={this.Inscription.bind(this,<p>vous etes deco</p>,0)}>Deconnexion </h3>  ;  
             this.var = "";
         }else{
-             bouttonInscription =   <h3 onClick={this.Inscription.bind(this,<Connection handler = {this.Inscription}/>,0)} >Inscription</h3> ;                   
+             bouttonInscription = <h3 onClick={this.Inscription.bind(this,<Inscription handler = {this.Inscription}/>,0)} >Inscription</h3> ;                   
         }
 
         return (

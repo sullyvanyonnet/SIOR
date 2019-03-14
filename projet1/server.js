@@ -70,6 +70,7 @@ curl -X POST -H 'Content-Type: application/json' -d '{"login": "coco", "password
 */
 
 app.get('/api/connect', (req, res) => {
+    console.log('/api/connect');
   
 	const login = req.query.login;
 	const password = req.query.password;
@@ -98,6 +99,7 @@ function connectCallback(res, result) {
 
 
 app.get('/api/inscription', (req, res) => {
+    console.log('/api/inscription');
   
 	const login = req.query.login;
 	const password = req.query.password;
@@ -123,6 +125,8 @@ function inscriptionCallback(res, result) {
 
 
 app.get('/api/getAllVoyages', function (req, res) {
+    console.log('/api/getAllVoyages');
+
     console.log("/getAllVoyages");
     //let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr']
     let sql = `select Voyage.voy_id, voy_nom, voy_debut, voy_fin, pho_id, pho_chemin 
@@ -144,7 +148,8 @@ function getAllVoyagesCallback(res, result) {
 
 
 app.get('/api/getVoyage', function (req, res) {
-    console.log("/getCommentairesVoyage");
+    console.log('/api/getVoyage');
+
     let voy_id = req.query.voy_id;
     //let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr']
     let sql = `select * from Commentaire, Voyage 
