@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
-class Connection extends React.Component {
+class Inscription extends React.Component {
 
     constructor(props) {
         super(props);
@@ -14,16 +14,16 @@ class Connection extends React.Component {
         this.annuler = this.annuler.bind(this)
 
         this.handlechange = this.handlechange.bind(this)
-        this.TestConnexion = this.TestConnexion.bind(this)
+        this.TestInscription = this.TestInscription.bind(this)
 
 
     }
-    TestConnexion(ID) {
+    TestInscription(ID) {
         console.log("dans test" + ID);
         if (ID > 0) {
-            this.props.handler(<h2>bonjour {this.state.login}</h2>, 1);
+            this.props.handler(<h2>Bienvenue {this.state.login}!</h2>, 1);
         } else {
-            this.setState({ Erreur: <div className="response" style={{ color: 'red' }}><h2> Les identifiants sont incorrects .</h2></div> });
+            this.setState({ Erreur: <div className="response" style={{ color: 'red' }}><h2> Probleme lors de l'Inscription.</h2></div> });
             //this.forceUpdate()
         }
     }
@@ -37,11 +37,10 @@ class Connection extends React.Component {
                 'password': this.state.password
             }
 
-
             axios.post('Inscription', data)
                 .then(res => {
-                    let Id = JSON.parse(res.data);
-                    this.TestConnexion(Id);
+                    let Id = JSON.parse(res.data).affectedRows;
+                    this.TestInscription(Id);
                 })
         }
 
@@ -108,4 +107,4 @@ class Connection extends React.Component {
     }
 }
 
-export default Connection;
+export default Inscription;
