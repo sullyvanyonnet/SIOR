@@ -24,6 +24,7 @@ class Connection extends React.Component {
            this.props.handler(<h2>bonjour {this.state.login}</h2>,1) ;
         }else{
             this.setState({Erreur:<div className="response" style={{color: 'red'}}><h2> Les identifiants sont incorrects .</h2></div>});
+            //this.forceUpdate()
         }
     }
   enregistrer(){
@@ -88,10 +89,8 @@ class Connection extends React.Component {
                     </td> 
                 </tr>
 
-                <tr>
-                    {this.Erreur}
-                </tr>
             </table>
+            {this.state.Erreur}
         </div>
 
 
