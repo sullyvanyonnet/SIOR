@@ -37,7 +37,6 @@ class Connection extends React.Component {
         axios.post('Identification', data )
             .then(res => {
                 let Id = JSON.parse(res.data).greeting;
-                console.log("dans axios sstate "+Id );
                 this.TestConnexion(Id );
             })
   }
