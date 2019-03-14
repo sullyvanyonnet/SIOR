@@ -61,38 +61,41 @@ class Connection extends React.Component {
 
     return (
         <div>
-            <div className="titre">
-                <h1>Connection</h1>             
-            </div>
+
             
-                
+                <div class="container">
+                <div className="titre">
+                    <h1>Connexion</h1>             
+                </div>
                 <div class="form-group row">
-                    <label  class="col-sm-2 col-form-label"> login :</label>
-                    <div class="col-sm-10">
+                    <label  class="col-sm-5 col-form-label"> login :</label>
+                    <div class="col-sm-3">
                         <input class="form-control" type="text" name="login" onChange={this.handlechange}/>
                     </div>
                 </div>
                 
-            <table>
-                <tr>
-                    <td>mot de passe :</td>
-                    <td><input type="password" name="password" onChange={this.handlechange}/></td>
-                </tr>
-                <tr>
-                    <td>
-                        <button class="btn btn-secondary" onClick={this.annuler}>
+            
+                <div class="form-group row">
+                    <label  class="col-sm-5 col-form-label">mot de passe :</label>
+                    <div class="col-sm-3">
+                        <input class="form-control" type="password" name="password" onChange={this.handlechange}/>
+                    </div>
+                </div>
+                <div class="form-group row mx-auto">
+                    <div class="col-sm-5">
+                        <button class="col-sm-3 btn btn-secondary" onClick={this.annuler}>
                             annuler
-                        </button>
-                    </td>
-                    
-                    <td>
-                        <button class="btn btn-secondary" onClick={this.enregistrer}>
+                        </button>  
+                    </div>
+                    <div class="col-sm-5">
+                        <button class="col-sm-3 btn btn-secondary" onClick={this.enregistrer}>
                             connexion
                         </button>
-                    </td> 
-                </tr>
+                    </div>  
+                </div>
 
-            </table>
+            
+            </div>
             {this.state.Erreur}
         </div>
 
