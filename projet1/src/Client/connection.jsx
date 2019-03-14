@@ -67,6 +67,7 @@ class Connection extends React.Component {
                 <div className="titre">
                     <h1>Connexion</h1>             
                 </div>
+                
                 <div class="form-group row">
                     <label  class="col-sm-5 col-form-label"> login :</label>
                     <div class="col-sm-3">
