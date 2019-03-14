@@ -85,13 +85,13 @@ class Inscription extends React.Component {
                     </tr>
                     <tr>
                         <td>
-                            <button className="btn btn-default" onClick={this.annuler}>
+                            <button class="btn btn-secondary" onClick={this.annuler}>
                                 annuler
                         </button>
                         </td>
 
                         <td>
-                            <button className="btn btn-default" onClick={this.enregistrer}>
+                            <button class="btn btn-secondary" onClick={this.enregistrer}>
                                 connexion
                         </button>
                         </td>

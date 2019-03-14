@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.css';
 import React, { Component } from 'react';
 import './App.css';
 import Connection from './connection.jsx';
@@ -40,14 +41,14 @@ class App extends Component {
         let bonjoursUser;
 
 		if(this.state.etatConnexion){
-				bouttonConnexion = <h3 onClick={this.Connection.bind(this,<p>vous etes deco</p>,0)}>Deconnexion </h3>;
+				bouttonConnexion = <a class="nav-item" onClick={this.Connection.bind(this,<p>vous etes deco</p>,0)}>Deconnexion </a>;
 				bouttonInscription = "";	
-				bonjoursUser = <h3>Bonjour, {this.state.login} </h3>;
+				bonjoursUser = <a class="nav-item">Bonjour, {this.state.login} </a>;
 			
 		}else{
 			
-                bouttonConnexion = <h3 onClick={this.Connection.bind(this,<Connection handler = {this.Connection}/>,0)} >Connexion</h3>;
-                bouttonInscription =   <h3 onClick={this.Inscription.bind(this,<Inscription handler = {this.Inscription}/>,0)} >Inscription</h3>;
+                bouttonConnexion = <a class="nav-item" onClick={this.Connection.bind(this,<Connection handler = {this.Connection}/>,0)} >Connexion</a>;
+                bouttonInscription =   <a class="nav-item" onClick={this.Inscription.bind(this,<Inscription handler = {this.Inscription}/>,0)} >Inscription</a>;
                 bonjoursUser =""; 
 		    
 		}
@@ -55,24 +56,20 @@ class App extends Component {
         return (
             <div className="App">
                 <div className="App-header">
-                    <div className="App-header-Tab">
-                        <table >
-                            <tr>
-                                <td>
-                                    {bonjoursUser}
-                                </td>
-                                <td>
-                                    {bouttonConnexion}
-                                </td>
-
-                                <td>
-                                    {bouttonInscription}
-                                </td>
-                            </tr>
-
-                        </table>
-                    </div>
-                </div>
+                    <nav class="navbar navbar-dark bg-dark">
+                        
+                        
+                            {bonjoursUser}
+                        
+                        
+                            {bouttonConnexion}
+                        
+                       
+                            {bouttonInscription}
+                        
+                       
+                    </nav>
+                </div>        
                 <div className="Reponse">
                         {this.state.MessageRetour}
                 </div>

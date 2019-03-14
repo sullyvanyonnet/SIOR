@@ -64,26 +64,29 @@ class Connection extends React.Component {
             <div className="titre">
                 <h1>Connection</h1>             
             </div>
-            <table>
+            
                 
-
-                <tr>
-                    <td>login :</td>
-                        <td><input type="text" name="login" onChange={this.handlechange}/></td>
-                </tr>
+                <div class="form-group row">
+                    <label  class="col-sm-2 col-form-label"> login :</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" type="text" name="login" onChange={this.handlechange}/>
+                    </div>
+                </div>
+                
+            <table>
                 <tr>
                     <td>mot de passe :</td>
                     <td><input type="password" name="password" onChange={this.handlechange}/></td>
                 </tr>
                 <tr>
                     <td>
-                        <button className="btn btn-default" onClick={this.annuler}>
+                        <button class="btn btn-secondary" onClick={this.annuler}>
                             annuler
                         </button>
                     </td>
                     
                     <td>
-                        <button className="btn btn-default" onClick={this.enregistrer}>
+                        <button class="btn btn-secondary" onClick={this.enregistrer}>
                             connexion
                         </button>
                     </td> 
