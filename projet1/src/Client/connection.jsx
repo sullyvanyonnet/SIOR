@@ -36,9 +36,9 @@ class Connection extends React.Component {
 
         axios.post('Identification', data )
             .then(res => {
-                console.log("dans axios"+res.getWriter());
-                console.log("dans axios sstate"+res.data);
-                this.TestConnexion(res.data.greeting);
+                let Id = JSON.parse(res.data).greeting;
+                console.log("dans axios sstate "+Id );
+                this.TestConnexion(Id );
             })
   }
 

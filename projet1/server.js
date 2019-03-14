@@ -73,7 +73,7 @@ app.get('/api/connect', (req, res) => {
 	const login = req.query.login;
 	const password = req.query.password;
   
-    Console.log(login + password);
+    console.log(login + password);
 	let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr'];
   
 	let sql = `SELECT count(*) as count, cli_id FROM Client 
