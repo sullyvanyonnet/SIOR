@@ -8,15 +8,18 @@ class App extends Component {
             etatConnexion: 0,      
             login: "",
             var: "",
-            bouttonHead: ""
+            bouttonHead: "",
+            bonjoursUser:""
         }
         this.Connection = this.Connection.bind(this)
+        this.Inscription = this.Inscription.bind(this)
 
     }
 
     Connection(test,etat){
         this.setState({
            var: test,
+           //bonjoursUser: test,
            etatConnexion: etat
         })   
 
@@ -55,6 +58,9 @@ class App extends Component {
                     <div className="App-header-Tab">
                         <table >
                             <tr>
+                                <td>
+                                    {this.state.bonjoursUser}
+                                </td>
                                 <td>
                                     {bouttonConnexion}
                                 </td>
