@@ -105,12 +105,16 @@ function inscriptionCallback(res, result) {
 app.get('/api/getAllVoyages', function (req, res) {
     console.log('/getAllVoyages');
 
+    let MinVoy_id = req.query.voy_id || 0;
+
     let sql = `select Voyage.voy_id, voy_nom, voy_debut, voy_fin, pho_id, pho_chemin 
                 from Voyage, Photo_voyage 
                 where Voyage.voy_id = Photo_voyage.voy_id 
                 and pho_id = (select min(pho_id) 
                                 from Photo_voyage as f 
-                                where f.voy_id = Voyage.voy_id)`
+                                where f.voy_id = Voyage.voy_id)
+                and Voyage.voy_id > ` + MinVoy_id + `
+                LIMIT 10`
 
     console.log(sql);
     MariaDB.executeSelect(db, sql, res, getAllVoyagesCallback);

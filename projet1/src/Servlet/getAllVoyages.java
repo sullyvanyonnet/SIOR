@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import manager.Manager;
+import manager.Voyage;
 
 /**
  * Servlet implementation class Accueil
@@ -56,13 +57,19 @@ public class getAllVoyages extends HttpServlet {
 		// et on l'enregistre en session
 		try {
 			HttpURLConnectionExample con = new HttpURLConnectionExample();
+			Voyage v = new ObjectMapper().readValue(request.getReader(), Voyage.class);
+			
+			Integer id = null;
+			if(v != null) {
+				id = v.getId();
+			}
 			
 			
 			ServletOutputStream out = response.getOutputStream();
 			ObjectMapper objectMapper = new ObjectMapper();
 			
 			out.write(objectMapper.writeValueAsBytes(
-					con.sendGet("http://localhost:9000/api/getAllVoyages")));
+					con.sendGet("http://localhost:9000/api/getAllVoyages?voy_id=" + id)));
 			out.close();
 			
 		}catch( Exception E) {
