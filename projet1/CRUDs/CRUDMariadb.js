@@ -27,11 +27,11 @@ module.exports = {
 			});
 		},
 
-	executeUpdate : function (db, sql) {
+	executeUpdate : function (db, sql, res, callback) {
 			connect(db[0], db[1], db[2], db[3]).then(conn => {	
 				conn.query(sql)
 					.then((rows) => {
-						console.log(rows);
+						callback(res, rows);
 					})
 					.catch(err => {
 						console.log("requete echouée: " + err);

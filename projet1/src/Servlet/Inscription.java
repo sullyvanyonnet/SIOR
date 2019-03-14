@@ -20,13 +20,13 @@ import manager.User;
  * Servlet implementation class Accueil
  */
 @WebServlet("/Inscription")
-public class Identification extends HttpServlet {
+public class Inscription extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Identification() {
+    public Inscription() {
         super();
         // TODO Auto-generated constructor stub
     }
