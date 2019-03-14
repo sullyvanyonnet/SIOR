@@ -20,6 +20,7 @@ module.exports = {
 					})
 					.catch(err => {
 						console.log("requete echouée: " + err);
+						callback(res, null);
 					});
 			})
 			.catch(err => {
@@ -35,6 +36,7 @@ module.exports = {
 					})
 					.catch(err => {
 						console.log("requete echouée: " + err);
+						callback(res, null);
 					});
 			})
 			.catch(err => {
