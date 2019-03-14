@@ -65,41 +65,51 @@ class Inscription extends React.Component {
 
         return (
             <div>
-                <div className="titre">
-                    <h1>Inscription</h1>
-                </div>
-                <table>
+                <div class="container">
+                    <div className="titre">
+                        <h1>Inscription</h1>
+                    </div>   
+                    <div class="form-group row">
+                        <label  class="col-sm-5 col-form-label"> login :</label>
+                        <div class="col-sm-3">
+                            <input type="text" name="login" onChange={this.handlechange} />
+                        </div>
+                    </div> 
 
+                    <div class="form-group row">
+                        <label  class="col-sm-5 col-form-label"> mot de passe :</label>
+                        <div class="col-sm-3">
+                            <input type="password" name="password" onChange={this.handlechange} />
+                        </div> 
 
-                    <tr>
-                        <td>login :</td>
-                        <td><input type="text" name="login" onChange={this.handlechange} /></td>
-                    </tr>
-                    <tr>
-                        <td>mot de passe :</td>
-                        <td><input type="password" name="password" onChange={this.handlechange} /></td>
-                    </tr>
-                    <tr>
-                        <td>vérifier le mot de passe :</td>
-                        <td><input type="password" name="verifPassword" onChange={this.handlechange} /></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <button class="btn btn-secondary" onClick={this.annuler}>
-                                annuler
-                        </button>
-                        </td>
+                    </div>
 
-                        <td>
-                            <button class="btn btn-secondary" onClick={this.enregistrer}>
+                    <div class="form-group row">
+                        <label  class="col-sm-5 col-form-label"> vérifier le mot de passe :</label>
+                        <div class="col-sm-3">
+                            <input type="password" name="verifPassword" onChange={this.handlechange} />
+                        </div> 
+
+                    </div>
+
+                    <div class="form-group row mx-auto">
+                        <div class="col-sm-5">
+                            <button class="col-sm-3 btn btn-secondary" onClick={this.annuler}> annuler</button>
+                        </div>
+                        <div class="col-sm-5">
+                            <button class="col-sm-3 btn btn-secondary" onClick={this.enregistrer}>
                                 connexion
                         </button>
-                        </td>
-                    </tr>
 
-                </table>
-                {this.state.Erreur}
+                        </div>  
+                    </div>
+                    {this.state.Erreur}
+                </div>
+
             </div>
+
+                
+           
 
 
 
