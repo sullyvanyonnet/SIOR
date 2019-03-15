@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import './App.css';
 import Connection from './connection.jsx';
 import Inscription from './inscription.jsx';
-//import AfficheVoyages from './AfficheVoyages.jsx';
-
-import UnVoyage from './unVoyage.jsx';
-
+import AfficheVoyages from './AfficheVoyages.jsx';
+let ReactBsTable = require('react-bootstrap-table');
+var BootstrapTable = ReactBsTable.BootstrapTable;
+var TableHeaderColumn = ReactBsTable.TableHeaderColumn;
 
 class App extends Component {
     constructor(props) {
@@ -40,23 +40,25 @@ class App extends Component {
         })
     }
 
-     AfficheVoyages(test, etat) {
+    AfficheVoyages(test, etat) {
     }
 
     render() {
         let bouttonConnexion;
         let bouttonInscription;
         let bonjoursUser;
-
+        let panier;
         if (this.state.etatConnexion) {
-            bouttonConnexion = <a class="nav-item" onClick={this.Connection.bind(this, <p>vous etes deco</p>, 0)}>Deconnexion </a>;
+            bouttonConnexion = <h2   onClick={this.Connection.bind(this, <p>vous etes deco</p>, 0)}>Deconnexion </h2 >;
             bouttonInscription = "";
-            bonjoursUser = <a class="nav-item">Bonjour, {this.state.login} </a>;
+            bonjoursUser = <h2 >Bonjour, {this.state.login} </h2 >;
+            panier = <div class="nav-item mr-sm-3 form-group row"> <img class="mr-sm-2" src="./icon/panier.png"  alt="Card image cap"/><h2>0</h2> </div>
+
 
         } else {
 
-            bouttonConnexion = <a class="nav-item" onClick={this.Connection.bind(this, <Connection handler={this.Connection} />, 0)} >Connexion</a>;
-            bouttonInscription = <a class="nav-item" onClick={this.Inscription.bind(this, <Inscription handler={this.Inscription} />, 0)} >Inscription</a>;
+            bouttonConnexion = <h2  onClick={this.Connection.bind(this, <Connection handler={this.Connection} />, 0)} >Connexion</h2>;
+            bouttonInscription = <h2  onClick={this.Inscription.bind(this, <Inscription handler={this.Inscription} />, 0)} >Inscription</h2>;
             bonjoursUser = "";
 
         }
@@ -64,52 +66,31 @@ class App extends Component {
         return (
             <div className="App">
                 <div className="App-header">
-                    <nav class="navbar navbar-dark bg-dark">
+                    <nav class="navbar navbar-dark bg-dark justify-content-end">
+                        <div class="nav-item mr-sm-3">
+                            {bonjoursUser}
+                        </div>
 
+                        <div class="nav-item mr-sm-3">
+                            {bouttonConnexion}
+                        </div>
+                        
 
-                        {bonjoursUser}
+                        <div class="nav-item mr-sm-3">
+                            {bouttonInscription}
+                        </div>
 
-
-                        {bouttonConnexion}
-
-
-                        {bouttonInscription}
-
+                        
+                            {panier}
+                        
 
                     </nav>
                 </div>
                 <div className="Reponse">
                     {this.state.MessageRetour}
                 </div>
-                <div className="ListVoyage">
-
-                    <UnVoyage 
-                        voyageId="1" 
-                        titre= "Le debut d'un longt voyage" 
-                        dateDebut= "24/10/1996" 
-                        dateFin= "24/10/2000"
-                        Text= "blablablablaaaaaaaaa"  
-                        IdPhoto= "1"
-                        CheminPhoto= "./Kings-Landing-game-of-thrones-20412877-1920-1080.jpg"
-                    />
-                    <UnVoyage 
-                        voyageId="1" 
-                        titre= "Le debut d'un longt voyage" 
-                        dateDebut= "24/10/1996" 
-                        dateFin= "24/10/2000"
-                        Text= "blablablablaaaaaaaaa"  
-                        IdPhoto= "1"
-                        CheminPhoto= "./Kings-Landing-game-of-thrones-20412877-1920-1080.jpg"
-                    />
-                    <UnVoyage 
-                        voyageId="1" 
-                        titre= "Le debut d'un longt voyage" 
-                        dateDebut= "24/10/1996" 
-                        dateFin= "24/10/2000"
-                        Text= "blablablablaaaaaaaaa"  
-                        IdPhoto= "1"
-                        CheminPhoto= "./Kings-Landing-game-of-thrones-20412877-1920-1080.jpg"
-                    />
+                <div className="ListVoyage" id="boutons">
+                    {Voyages}
                 </div>
             </div>
         );
