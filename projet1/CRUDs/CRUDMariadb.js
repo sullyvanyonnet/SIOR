@@ -21,7 +21,9 @@ module.exports = {
 					.catch(err => {
 						console.log("requete echouée: " + err);
 						callback(res, null);
-					});
+                    })
+                    .finally( () => {conn.close()
+                    });
 			})
 			.catch(err => {
 				console.log("not connected due to error: " + err);
