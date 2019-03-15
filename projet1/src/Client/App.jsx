@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 import './App.css';
 import Connection from './connection.jsx';
 import Inscription from './inscription.jsx';
-//import AfficheVoyages from './AfficheVoyages.jsx';
-
-import UnVoyage from './unVoyage.jsx';
-
+import AfficheVoyages from './AfficheVoyages.jsx';
+let ReactBsTable = require('react-bootstrap-table');
+var BootstrapTable = ReactBsTable.BootstrapTable;
+var TableHeaderColumn = ReactBsTable.TableHeaderColumn;
 
 class App extends Component {
     constructor(props) {
@@ -40,13 +40,15 @@ class App extends Component {
         })
     }
 
-     AfficheVoyages(test, etat) {
+    AfficheVoyages(test, etat) {
     }
 
     render() {
         let bouttonConnexion;
         let bouttonInscription;
         let bonjoursUser;
+        let Voyages = <AfficheVoyages />
+
 
         if (this.state.etatConnexion) {
             bouttonConnexion = <a class="nav-item" onClick={this.Connection.bind(this, <p>vous etes deco</p>, 0)}>Deconnexion </a>;
@@ -60,6 +62,9 @@ class App extends Component {
             bonjoursUser = "";
 
         }
+
+
+        
 
         return (
             <div className="App">
@@ -81,35 +86,8 @@ class App extends Component {
                 <div className="Reponse">
                     {this.state.MessageRetour}
                 </div>
-                <div className="ListVoyage">
-
-                    <UnVoyage 
-                        voyageId="1" 
-                        titre= "Le debut d'un longt voyage" 
-                        dateDebut= "24/10/1996" 
-                        dateFin= "24/10/2000"
-                        Text= "blablablablaaaaaaaaa"  
-                        IdPhoto= "1"
-                        CheminPhoto= "./Kings-Landing-game-of-thrones-20412877-1920-1080.jpg"
-                    />
-                    <UnVoyage 
-                        voyageId="1" 
-                        titre= "Le debut d'un longt voyage" 
-                        dateDebut= "24/10/1996" 
-                        dateFin= "24/10/2000"
-                        Text= "blablablablaaaaaaaaa"  
-                        IdPhoto= "1"
-                        CheminPhoto= "./Kings-Landing-game-of-thrones-20412877-1920-1080.jpg"
-                    />
-                    <UnVoyage 
-                        voyageId="1" 
-                        titre= "Le debut d'un longt voyage" 
-                        dateDebut= "24/10/1996" 
-                        dateFin= "24/10/2000"
-                        Text= "blablablablaaaaaaaaa"  
-                        IdPhoto= "1"
-                        CheminPhoto= "./Kings-Landing-game-of-thrones-20412877-1920-1080.jpg"
-                    />
+                <div className="ListVoyage" id="boutons">
+                    {Voyages}
                 </div>
             </div>
         );

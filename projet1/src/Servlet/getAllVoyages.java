@@ -59,19 +59,22 @@ public class getAllVoyages extends HttpServlet {
 			HttpURLConnectionExample con = new HttpURLConnectionExample();
 			Voyage v = new ObjectMapper().readValue(request.getReader(), Voyage.class);
 			
-			Integer id = null;
+			Integer idMax = null;
 			if(v != null) {
-				id = v.getId();
+				idMax = v.getIdMax();
 			}
 			
 			
 			ServletOutputStream out = response.getOutputStream();
 			ObjectMapper objectMapper = new ObjectMapper();
 			
-			out.write(objectMapper.writeValueAsBytes(
-					con.sendGet("http://localhost:9000/api/getAllVoyages?voy_id=" + id)));
+			out.write(objectMapper.writeValueAsBytes([{"voy_id":1,"voy_nom":"Croisière dans le secteur de Koprulu","voy_debut":"2012-03-18T23:00:00.000Z","voy_fin":"2019-03-18T23:00:00.000Z","pho_id":1,"pho_chemin":"./images/korhal-starcraft_987563239.jpg"},{"voy_id":2,"voy_nom":"Randonnée en westeros","voy_debut":"2021-03-18T23:00:00.000Z","voy_fin":"2030-03-18T23:00:00.000Z","pho_id":3,"pho_chemin":"./images/7d5d9f0055fbf4f6c0f609e87e211463.jpg"}]
+	                ));
 			out.close();
-			
+			/*
+out.write(objectMapper.writeValueAsBytes(
+					con.sendGet("http://localhost:9000/api/getAllVoyages?voy_id=" + idMax)));
+			out.close();*/
 		}catch( Exception E) {
 			
 		}
