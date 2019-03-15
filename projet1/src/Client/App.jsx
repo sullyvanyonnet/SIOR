@@ -47,7 +47,9 @@ class App extends Component {
         let bouttonConnexion;
         let bouttonInscription;
         let bonjoursUser;
+        let Voyages = <AfficheVoyages />
         let panier;
+
         if (this.state.etatConnexion) {
             bouttonConnexion = <h2   onClick={this.Connection.bind(this, <p>vous etes deco</p>, 0)}>Deconnexion </h2 >;
             bouttonInscription = "";

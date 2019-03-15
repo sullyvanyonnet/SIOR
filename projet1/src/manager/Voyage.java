@@ -3,13 +3,13 @@ package manager;
 public class Voyage {
 
 
-		private Integer id;
+		private Integer idMax;
 		
 		
-		public Integer getId() {
-			return id;
+		public Integer getIdMax() {
+			return idMax;
 		}
-		public void setId(Integer id) {
-			this.id = id;
+		public void setIdMax(Integer idMax) {
+			this.idMax = idMax;
 		}
 }
