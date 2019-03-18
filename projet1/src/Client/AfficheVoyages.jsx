@@ -62,7 +62,7 @@ class AfficheVoyage extends React.Component {
     render() {
 
         return (
-            <div>
+            <div class="row">
                 {this.state.tableVoyages}
             </div>
         );

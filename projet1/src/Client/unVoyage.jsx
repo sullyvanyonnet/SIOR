@@ -26,17 +26,21 @@ class unVoyage extends React.Component {
 
     render() {
         return (
-            <div class="aa">
-                <div class="card mb-3">
-                <img class="card-img-top" src={this.state.CheminPhoto} width={300} height={300} alt="Card image cap"/>
-                <div class="card-body">
-                    <h3 class="card-title">{this.state.titre}</h3>
-                    <p class="card-text">Du :{this.state.dateDebut} au {this.state.dateFin}</p>
-                    <p class="card-text">{this.state.Text}</p>
+            <div class="container col-sm-4" >
+                <div class="row">
+                    <div class="col-sm">
+                        <div class="card mb-3 ">
+                            <img class="card-img-top img-thumbnail img-fluid" src={this.state.CheminPhoto} alt="Card image cap" />
+                            <div class="card-body">
+                                <h3 class="card-title">{this.state.titre}</h3>
+                                <p class="card-text">Du {this.state.dateDebut} au {this.state.dateFin}</p>
+                                <p class="card-text">{this.state.Text}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                </div>
-           </div> 
-            )
-        }
+            </div>
+        )
     }
+}
 export default unVoyage;

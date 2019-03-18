@@ -107,7 +107,7 @@ app.get('/api/getAllVoyages', function (req, res) {
 
     let MinVoy_id = req.query.voy_id || 0;
 
-    let sql = `select Voyage.voy_id, voy_nom, voy_debut, voy_fin, pho_id, pho_chemin 
+    let sql = `select Voyage.voy_id, voy_nom, DATE_FORMAT(voy_debut, "%d/%c/%Y") as voy_debut, DATE_FORMAT(voy_fin, "%d/%c/%Y") as voy_fin, pho_id, pho_chemin 
                 from Voyage, Photo_voyage 
                 where Voyage.voy_id = Photo_voyage.voy_id 
                 and pho_id = (select min(pho_id) 
@@ -131,7 +131,7 @@ app.get('/api/getVoyage', function (req, res) {
     console.log('/getVoyage');
 
     let voy_id = req.query.voy_id;
-    let sql = `select * from Commentaire, Voyage 
+    let sql = `select voy_id, voy_nom, DATE_FORMAT(voy_debut, "%d/%c/%Y"), DATE_FORMAT(voy_fin, "%d/%c/%Y"), voy_description from Commentaire, Voyage 
         where Voyage.voy_id = Commentaire.voy_id
         and Commentaire.voy_id = ` + voy_id + `;`
         
