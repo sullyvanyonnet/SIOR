@@ -26,7 +26,7 @@ class unVoyage extends React.Component {
 
     render() {
         return (
-            <div class="container col-sm-4" >
+            <div class="container col-sm-4" onClick={() => {alert("coucou " + this.state.voyageId)}}>
                 <div class="row">
                     <div class="col-sm">
                         <div class="card mb-3 ">
