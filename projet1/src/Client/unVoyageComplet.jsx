@@ -1,59 +1,79 @@
 import React from 'react';
 import './App.css';
+import axios from 'axios';
+
 import 'bootstrap/dist/css/bootstrap.css';
 
-class unVoyage extends React.Component {
+class unVoyageComplet extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            voyageId: props.voyageId,
+            JSONVoyage : "",
             voyageId: props.voyageId,
             titre: props.titre,
             dateDebut: props.dateDebut,
             dateFin: props.dateFin,
             Text: props.Text,
             IdPhoto: "",
-            Photos: props.Photos,
+            CheminPhoto: props.CheminPhoto,
             voyages: ""
         }
 
-        this.handlechange = this.handlechange.bind(this)
-
+        this.ChargePhoto = this.ChargePhoto.bind(this)
+        
+    }
+    ChargePhoto(){
+      var data = {
+            'ID': this.state.voyageId
+        }  
+         axios.post('', data)
+            .then(res => {
+                this.setState({
+                    JSONVoyage: JSON.parse(res.data)
+                })
+                
+                 });
     }
 
-    handlechange(event) {
-    }
+
+    
 
     render() {
         return (
-            <div class="container col-sm-8" >
-                <div class="row">
-                    <div class="col-sm">
-                        <div class="card mb-3 ">
-                            <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img class="d-block w-100" src="..." alt="First slide" />
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img class="d-block w-100" src="..." alt="Second slide" />
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img class="d-block w-100" src="..." alt="Third slide" />
+        <div class="container col-sm-8" >
+            <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.props.handler()}} > retour </button>
+
+                    <div class="row">
+                        <div class="col-sm">
+                            <div class="card mb-3 ">
+                                <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100" src={this.state.dateDebut} alt="First slide" />
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src={this.state.dateDebut} alt="Second slide" />
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src={this.state.dateDebut} alt="Third slide" />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <img class="card-img-top img-thumbnail img-fluid" src={this.state.CheminPhoto} alt="Card image cap" />
-                            <div class="card-body">
-                                <h3 class="card-title">{this.state.titre}</h3>
-                                <p class="card-text">Du {this.state.dateDebut} au {this.state.dateFin}</p>
-                                <p class="card-text">{this.state.Text}</p>
+                                <img class="card-img-top img-thumbnail img-fluid" src={this.state.CheminPhoto} alt="Card image cap" />
+                                <div class="card-body">
+                                    <h3 class="card-title">{this.state.titre}</h3>
+                                    <p class="card-text">Du {this.state.dateDebut} au {this.state.dateFin}</p>
+                                    <p class="card-text">{this.state.Text}</p>
+                                    <button class="col-sm-3 btn btn-secondary"> réservé </button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            
         )
     }
 }
-export default unVoyage;
+export default unVoyageComplet;

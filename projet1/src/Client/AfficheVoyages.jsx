@@ -2,6 +2,8 @@ import React from 'react';
 import './App.css';
 import axios from 'axios';
 import UnVoyage from './unVoyage.jsx';
+import UnVoyageComplet from './unVoyageComplet.jsx';
+
 class AfficheVoyage extends React.Component {
 
     constructor(props) {
@@ -18,6 +20,7 @@ class AfficheVoyage extends React.Component {
 
         this.getAllVoyages = this.getAllVoyages.bind(this)
         this.handlechange = this.handlechange.bind(this)
+        this.afficheUneDestination = this.afficheUneDestination.bind(this)
         this.getAllVoyages();
 
     }
@@ -59,11 +62,18 @@ class AfficheVoyage extends React.Component {
     }
 
     afficheUneDestination(id){
-        
-        //this.state.tableVoyages= codeHTML
-         alert("l'id est "+id);
-        //this.forceUpdate()
+       
+       this.state.JSONVoyages.map((k) =>
+             id == k.voy_id ?
+                this.state.tableVoyages = <UnVoyageComplet handler={this.getAllVoyages} voyageId={k.voy_id} titre={k.voy_nom} dateDebut={k.voy_debut} dateFin={k.voy_fin} Text={k.voy_description} IdPhoto={k.pho_id} CheminPhoto={k.pho_chemin} />          
+            :
+                null
 
+        );
+        //this.state.tableVoyages = <UnVoyageComplet  voyageId="0" titre="toto" dateDebut="20/02/02"dateFin="20/02/02" Text="blabla" IdPhoto="0" CheminPhoto="./images/korhal-starcraft_987563239.jpg" />          
+
+        this.forceUpdate()
+        
     }
 
     render() {
