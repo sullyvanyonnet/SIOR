@@ -131,9 +131,9 @@ app.get('/api/getVoyage', function (req, res) {
     console.log('/getVoyage');
 
     let voy_id = req.query.voy_id;
-    let sql = `select voy_id, voy_nom, DATE_FORMAT(voy_debut, "%d/%c/%Y"), DATE_FORMAT(voy_fin, "%d/%c/%Y"), voy_description from Commentaire, Voyage 
-        where Voyage.voy_id = Commentaire.voy_id
-        and Commentaire.voy_id = ` + voy_id + `;`
+    let sql = `select Voyage.voy_id, voy_nom, DATE_FORMAT(voy_debut, "%d/%c/%Y")as voy_debut, DATE_FORMAT(voy_fin, "%d/%c/%Y")as voy_fin, voy_description 
+    from Voyage 
+    where Voyage.voy_id = ` + voy_id + `;`
         
     console.log(sql);
     MariaDB.executeSelect(db, sql, res, getCommentairesVoyageCallback);
