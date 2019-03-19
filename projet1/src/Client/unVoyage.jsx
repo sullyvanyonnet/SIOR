@@ -16,17 +16,19 @@ class unVoyage extends React.Component {
             CheminPhoto: props.CheminPhoto,
             voyages: ""
         }
-
         this.handlechange = this.handlechange.bind(this)
 
     }
 
     handlechange(event) {
+        this.props.handler(this.state.voyageId);
     }
+
+
 
     render() {
         return (
-            <div class="container col-sm-4" onClick={() => {alert("coucou " + this.state.voyageId)}}>
+            <div class="container col-sm-4" onClick={() => {this.handlechange()}}>
                 <div class="row">
                     <div class="col-sm">
                         <div class="card mb-3 ">

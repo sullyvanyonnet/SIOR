@@ -20,8 +20,6 @@ class App extends Component {
         }
         this.Connection = this.Connection.bind(this)
         this.Inscription = this.Inscription.bind(this)
-        this.AfficheVoyages = this.AfficheVoyages.bind(this)
-
     }
 
     Connection(test, etat, nom) {
@@ -40,14 +38,11 @@ class App extends Component {
         })
     }
 
-    AfficheVoyages(test, etat) {
-    }
 
     render() {
         let bouttonConnexion;
         let bouttonInscription;
         let bonjoursUser;
-        let Voyages = <AfficheVoyages />
         let panier;
 
         if (this.state.etatConnexion) {
@@ -92,7 +87,7 @@ class App extends Component {
                     {this.state.MessageRetour}
                 </div>
                 <div className="ListVoyage" id="boutons">
-                    {Voyages}
+                    <AfficheVoyages />
                 </div>
             </div>
         );

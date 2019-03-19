@@ -46,7 +46,7 @@ class AfficheVoyage extends React.Component {
                 })
 
             this.state.tableVoyages = this.state.JSONVoyages.map((k) =>
-                <UnVoyage voyageId={k.voy_id} titre={k.voy_nom} dateDebut={k.voy_debut} dateFin={k.voy_fin} Text={k.voy_description} IdPhoto={k.pho_id} CheminPhoto={k.pho_chemin} />          
+                <UnVoyage handler={this.afficheUneDestination} voyageId={k.voy_id} titre={k.voy_nom} dateDebut={k.voy_debut} dateFin={k.voy_fin} Text={k.voy_description} IdPhoto={k.pho_id} CheminPhoto={k.pho_chemin} />          
             );
             this.forceUpdate()
 
@@ -58,6 +58,13 @@ class AfficheVoyage extends React.Component {
 
     }
 
+    afficheUneDestination(id){
+        
+        //this.state.tableVoyages= codeHTML
+         alert("l'id est "+id);
+        //this.forceUpdate()
+
+    }
 
     render() {
 
