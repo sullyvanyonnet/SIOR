@@ -58,3 +58,12 @@ ul {
     transform: rotate(360deg);
   }
 }
+
+#bootstrap-override {
+  display: flex;
+  flex-wrap: wrap;
+}
+#bootstrap-override > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
