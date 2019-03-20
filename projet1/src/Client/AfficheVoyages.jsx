@@ -38,8 +38,6 @@ class AfficheVoyage extends React.Component {
     }
 
     getAllVoyages() {
-
-
         var data = {
             'voy_id': this.state.idMax
         }

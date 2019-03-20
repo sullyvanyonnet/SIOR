@@ -4,6 +4,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.css';
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import Commentaires from './commentaires.jsx';
 
 class unVoyageComplet extends React.Component {
 
@@ -49,9 +50,10 @@ class unVoyageComplet extends React.Component {
 
     reserve(){
          var data = {
-            'voy_id': this.state.voyageId
+            'voy_id': this.state.voyageId,
+            'cli_id' : this.state.EtatConnexion
         }  
-        axios.post('', data)
+        axios.post('Reservation', data)
             .then(res => {
                 this.setState({
                     JSONVoyage: JSON.parse(res.data)
@@ -84,9 +86,11 @@ class unVoyageComplet extends React.Component {
 
                                     <button class="col-sm-3 btn btn-secondary"> réservé </button>
                                 </div>
-                    </div>
-                <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.props.handler()}} > retour </button>
-                </div>
+            </div>
+            <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.props.handler()}} > retour </button>
+       <Commentaires  Nom= "Kevin"  Text= "First"  CheminPhoto="" />
+
+        </div>
             
         )
     }
