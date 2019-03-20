@@ -1,6 +1,6 @@
 package manager;
 
-public class Reservation {
+public class Res {
 
 
 		private Integer voy_id;
