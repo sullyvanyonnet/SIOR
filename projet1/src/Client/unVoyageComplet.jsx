@@ -62,7 +62,21 @@ class unVoyageComplet extends React.Component {
             });
     }
 
-
+    GetAllCommentaire(){
+      var data = {
+            'voy_id': this.state.voyageId
+        }  
+         axios.post('getCommentairesVoyage', data)
+            .then(res => {
+                this.setState({
+                    JSONVoyage: JSON.parse(res.data)
+                })
+                 this.state.Photos = this.state.JSONVoyage.map((k) =>
+                        <Commentaires  Nom=""   Text={k.com_texte}  CheminPhoto="" />
+                 );
+                this.forceUpdate()
+            });
+    }
 
     
 
@@ -84,7 +98,7 @@ class unVoyageComplet extends React.Component {
                                     <p class="card-text">{this.state.Text}</p>
                                     <h3 class="card-title">{this.state.prix}€</h3>
 
-                                    <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.props.reserve()}}> réservé </button>
+                                    <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.reserve()}}> réservé </button>
                                 </div>
             </div>
             <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.props.handler()}} > retour </button>
