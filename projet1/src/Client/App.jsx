@@ -87,7 +87,7 @@ class App extends Component {
                     {this.state.MessageRetour}
                 </div>
                 <div className="ListVoyage" id="boutons">
-                    <AfficheVoyages />
+                    <AfficheVoyages EtatConnexion= {this.state.etatConnexion}/>
                 </div>
             </div>
         );

@@ -20,6 +20,7 @@ class unVoyageComplet extends React.Component {
             IdPhoto: "",
             Photos:"",
             voyages: "",
+            EtatConnexion:props.EtatConnexion,
             prix:props.prix
         }
 
