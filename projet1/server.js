@@ -165,7 +165,7 @@ app.get('/api/getCommentairesVoyage', function (req, res) {
     console.log('/getCommentairesVoyage');
 
     let voy_id = req.query.voy_id;
-    let sql = `select * from Commentaire where voy_id = ` + voy_id + `;`
+    let sql = `select com_id, com_texte, cli_login from Commentaire, Client where Client.cli_id = Commentaire.cli_id and voy_id = ` + voy_id + `;`
 
     console.log(sql);
     MariaDB.executeSelect(db, sql, res, getCommentairesVoyageCallback);
