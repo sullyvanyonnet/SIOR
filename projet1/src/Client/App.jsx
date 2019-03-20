@@ -18,7 +18,8 @@ class App extends Component {
             login: "",
             MessageRetour: "",
             bouttonHead: "",
-            voyage: ""
+            voyage: "",
+            Main:""
         }
         this.Connection = this.Connection.bind(this)
         this.Inscription = this.Inscription.bind(this)
@@ -111,7 +112,7 @@ class App extends Component {
                     {this.state.MessageRetour}
                 </div>
                 <div className="ListVoyage" id="boutons">
-                    <AfficheVoyages EtatConnexion= {this.state.etatConnexion}/>
+                    {this.state.Main}
                 </div>
             </div>
         );
