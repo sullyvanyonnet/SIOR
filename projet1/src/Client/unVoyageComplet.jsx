@@ -84,7 +84,7 @@ class unVoyageComplet extends React.Component {
                                     <p class="card-text">{this.state.Text}</p>
                                     <h3 class="card-title">{this.state.prix}€</h3>
 
-                                    <button class="col-sm-3 btn btn-secondary"> réservé </button>
+                                    <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.props.reserve()}}> réservé </button>
                                 </div>
             </div>
             <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.props.handler()}} > retour </button>
