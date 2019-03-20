@@ -36,16 +36,16 @@ class Panier extends React.Component {
 
     getAllVoyages() {
         var data = {
-            'voy_id': this.state.idMax
+            'voy_id': this.state.EtatConnexion
         }
-        axios.post('getAllVoyages', data)
+        axios.post('getPanierClient', data)
             .then(res => {
                 this.setState({
                     JSONVoyages: JSON.parse(res.data)
                 })
 
                 this.state.tableVoyages = this.state.JSONVoyages.map((k) =>
-                    <UnPanier handler={this.afficheUneDestination} voyageId={k.voy_id} titre={k.voy_nom} dateDebut={k.voy_debut} dateFin={k.voy_fin} Text={k.voy_description} IdPhoto={k.pho_id} CheminPhoto={k.pho_chemin} prix={k.voy_prix}/>
+                    <UnPanier EtatConnexion={this.state.EtatConnexion} voyageId={k.voy_id} titre={k.voy_nom} dateDebut={k.voy_debut} dateFin={k.voy_fin} Text={k.voy_description} IdPhoto={k.pho_id} CheminPhoto={k.pho_chemin} prix={k.voy_prix}/>
                 );
                 this.forceUpdate()
 
