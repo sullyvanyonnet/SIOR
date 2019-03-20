@@ -32,7 +32,7 @@ class App extends Component {
 
     AfficheVoyages(){
         this.setState({
-            Main : " "/>
+            Main : " "
         })
         this.setState({
             Main : <AfficheVoyages EtatConnexion= {this.state.etatConnexion}/>
