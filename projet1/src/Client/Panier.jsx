@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
+import UnPanier from './unPanier.jsx';
 
 class Panier extends React.Component {
 
@@ -44,7 +45,7 @@ class Panier extends React.Component {
                 })
 
                 this.state.tableVoyages = this.state.JSONVoyages.map((k) =>
-                    <UnVoyage handler={this.afficheUneDestination} voyageId={k.voy_id} titre={k.voy_nom} dateDebut={k.voy_debut} dateFin={k.voy_fin} Text={k.voy_description} IdPhoto={k.pho_id} CheminPhoto={k.pho_chemin} prix={k.voy_prix}/>
+                    <UnPanier handler={this.afficheUneDestination} voyageId={k.voy_id} titre={k.voy_nom} dateDebut={k.voy_debut} dateFin={k.voy_fin} Text={k.voy_description} IdPhoto={k.pho_id} CheminPhoto={k.pho_chemin} prix={k.voy_prix}/>
                 );
                 this.forceUpdate()
 
@@ -59,7 +60,7 @@ class Panier extends React.Component {
 
         return (
             <div class="row display-flex">
-            <h1>Voici votre panier : </h1>
+            <h1> Voici votre panier : </h1>
                 <div class="card-group">
                     {this.state.tableVoyages}
                 </div>

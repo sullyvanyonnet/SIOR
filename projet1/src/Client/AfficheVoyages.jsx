@@ -46,7 +46,6 @@ class AfficheVoyage extends React.Component {
                 this.setState({
                     JSONVoyages: JSON.parse(res.data)
                 })
-
                 this.state.tableVoyages = this.state.JSONVoyages.map((k) =>
                     <UnVoyage handler={this.afficheUneDestination} voyageId={k.voy_id} titre={k.voy_nom} dateDebut={k.voy_debut} dateFin={k.voy_fin} Text={k.voy_description} IdPhoto={k.pho_id} CheminPhoto={k.pho_chemin} prix={k.voy_prix}/>
                 );
@@ -79,7 +78,6 @@ class AfficheVoyage extends React.Component {
 
         return (
             <div class="row display-flex">
-                <h1>Voici notre liste de voyages disponoble  : </h1>
                 <div class="card-group">
                     {this.state.tableVoyages}
                 </div>
