@@ -8,6 +8,7 @@ class AfficheVoyage extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log(props.EtatConnexion);
         this.state = {
             password: "",
             login: "",

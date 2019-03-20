@@ -184,8 +184,8 @@ app.get('/api/getPanierClient', function (req, res) {
 
     let sql = `select Voyage.voy_id, voy_nom, DATE_FORMAT(voy_debut, "%d/%c/%Y") as voy_debut, DATE_FORMAT(voy_fin, "%d/%c/%Y") as voy_fin, voy_prix, pho_id, pho_chemin 
                 from Voyage, Photo_voyage, Reservation 
-                where Voyage.voy_id = Photo_voyage.voy_id a
-                nd Voyage.voy_id = Reservation.voy_id 
+                where Voyage.voy_id = Photo_voyage.voy_id 
+                and Voyage.voy_id = Reservation.voy_id 
                 and pho_id = (select min(pho_id) 
                                 from Photo_voyage as f 
                                 where f.voy_id = Voyage.voy_id)

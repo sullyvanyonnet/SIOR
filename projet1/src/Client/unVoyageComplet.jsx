@@ -21,15 +21,17 @@ class unVoyageComplet extends React.Component {
             Text: props.Text,
             IdPhoto: "",
             Photos:"",
+            Commentaires:"",
             voyages: "",
             EtatConnexion:props.EtatConnexion,
             prix:props.prix
         }
 
         this.ChargePhoto = this.ChargePhoto.bind(this)
+        this.GetAllCommentaire = this.GetAllCommentaire.bind(this)
         this.reserve = this.reserve.bind(this)
         this.ChargePhoto();
-        
+        this.GetAllCommentaire();
     }
     ChargePhoto(){
       var data = {
@@ -72,8 +74,8 @@ class unVoyageComplet extends React.Component {
                 this.setState({
                     JSONVoyage: JSON.parse(res.data)
                 })
-                 this.state.Photos = this.state.JSONVoyage.map((k) =>
-                        <Commentaires  Nom=""   Text={k.com_texte}  CheminPhoto="" />
+                 this.state.Commentaires = this.state.JSONVoyage.map((k) =>
+                        <Commentaires  Nom={k.cli_login}   Text={k.com_texte}  CheminPhoto="" />
                  );
                 this.forceUpdate()
             });
@@ -110,7 +112,7 @@ class unVoyageComplet extends React.Component {
                                 </div>
             </div>
             <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.props.handler()}} > retour </button>
-       <Commentaires  Nom= "Kevin"  Text= "First"  CheminPhoto="" />
+                {this.state.Commentaires}
 
         </div>
             
