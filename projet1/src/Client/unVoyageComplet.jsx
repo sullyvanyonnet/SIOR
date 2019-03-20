@@ -25,25 +25,26 @@ class unVoyageComplet extends React.Component {
 
         this.ChargePhoto = this.ChargePhoto.bind(this)
         this.reserve = this.reserve.bind(this)
-
+        this.ChargePhoto();
         
     }
     ChargePhoto(){
       var data = {
-            'ID': this.state.voyageId
+            'voy_id': this.state.voyageId
         }  
-         axios.post('', data)
+         axios.post('getImagesVoyage', data)
             .then(res => {
                 this.setState({
                     JSONVoyage: JSON.parse(res.data)
                 })
-                
+                console.log(this.state.JSONVoyage);
+
             });
     }
 
     reserve(){
          var data = {
-            'ID': this.state.voyageId
+            'voy_id': this.state.voyageId
         }  
         axios.post('', data)
             .then(res => {
