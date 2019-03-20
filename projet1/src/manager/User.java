@@ -2,7 +2,7 @@ package manager;
 
 public class User {
 
-	private Integer id;
+	private Integer cli_id;
 	private String login;
 	private String password;
 
@@ -22,11 +22,11 @@ public class User {
 		this.password = password;
 	}
 	
-	public Integer getId() {
-		return id;
+	public Integer getCli_id() {
+		return cli_id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setCli_id(Integer cli_id) {
+		this.cli_id = cli_id;
 	}
 }

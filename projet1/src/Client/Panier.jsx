@@ -36,7 +36,7 @@ class Panier extends React.Component {
 
     getAllVoyages() {
         var data = {
-            'voy_id': this.state.EtatConnexion
+            'cli_id': this.state.EtatConnexion
         }
         axios.post('getPanierClient', data)
             .then(res => {

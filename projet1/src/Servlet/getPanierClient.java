@@ -61,7 +61,7 @@ public class getPanierClient extends HttpServlet {
 			
 			Integer cli_id = null;
 			if(u != null) {
-				cli_id = u.getId();
+				cli_id = u.getCli_id();
 			}
 			
 			
