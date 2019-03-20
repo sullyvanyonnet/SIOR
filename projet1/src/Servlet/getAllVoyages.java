@@ -59,9 +59,9 @@ public class getAllVoyages extends HttpServlet {
 			HttpURLConnectionExample con = new HttpURLConnectionExample();
 			Voyage v = new ObjectMapper().readValue(request.getReader(), Voyage.class);
 			
-			Integer idMax = null;
+			Integer voy_id = null;
 			if(v != null) {
-				idMax = v.getIdMax();
+				voy_id = v.getvVoy_id();
 			}
 			
 			
@@ -69,7 +69,7 @@ public class getAllVoyages extends HttpServlet {
 			ObjectMapper objectMapper = new ObjectMapper();
 			
 			out.write(objectMapper.writeValueAsBytes(
-					con.sendGet("http://localhost:9000/api/getAllVoyages?voy_id=" + idMax)));
+					con.sendGet("http://localhost:9000/api/getAllVoyages?voy_id=" + voy_id)));
 			out.close();
 			
 		}catch( Exception E) {
