@@ -40,7 +40,7 @@ class AfficheVoyage extends React.Component {
 
 
         var data = {
-            'idMax': this.state.idMax
+            'voy_id': this.state.idMax
         }
         axios.post('getAllVoyages', data)
             .then(res => {
