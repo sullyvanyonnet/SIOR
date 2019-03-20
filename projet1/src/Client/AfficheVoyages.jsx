@@ -64,7 +64,7 @@ class AfficheVoyage extends React.Component {
 
         this.state.JSONVoyages.map((k) =>
             id == k.voy_id ?
-                this.state.tableVoyages = <UnVoyageComplet handler={this.getAllVoyages} EtatConnexion={this.state.EtatConnexion} voyageId={k.voy_id} titre={k.voy_nom} dateDebut={k.voy_debut} dateFin={k.voy_fin} Text={k.voy_description} IdPhoto={k.pho_id} CheminPhoto={k.pho_chemin} prix={k.voy_prix}/>
+                this.state.tableVoyages = <UnVoyageComplet handler={this.getAllVoyages} EtatConnexion={this.state.EtatConnexion} voyageId={k.voy_id} titre={k.voy_nom} dateDebut={k.voy_debut} dateFin={k.voy_fin} Text={k.voy_description} IdPhoto={k.pho_id} CheminPhoto={k.pho_chemin} description={k.voy_description}prix={k.voy_prix}/>
                 :
                 null
 

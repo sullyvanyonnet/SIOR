@@ -107,7 +107,7 @@ app.get('/api/getAllVoyages', function (req, res) {
 
     let MinVoy_id = req.query.voy_id || 0;
 
-    let sql = `select Voyage.voy_id, voy_nom, DATE_FORMAT(voy_debut, "%d/%c/%Y") as voy_debut, DATE_FORMAT(voy_fin, "%d/%c/%Y") as voy_fin, voy_prix, pho_id, pho_chemin 
+    let sql = `select Voyage.voy_id, voy_nom, DATE_FORMAT(voy_debut, "%d/%c/%Y") as voy_debut, DATE_FORMAT(voy_fin, "%d/%c/%Y") as voy_fin, voy_description, voy_prix, pho_id, pho_chemin 
                 from Voyage, Photo_voyage 
                 where Voyage.voy_id = Photo_voyage.voy_id 
                 and pho_id = (select min(pho_id) 
@@ -182,7 +182,7 @@ app.get('/api/getPanierClient', function (req, res) {
 
     let cli_id = req.query.cli_id || 0;
 
-    let sql = `select Voyage.voy_id, voy_nom, DATE_FORMAT(voy_debut, "%d/%c/%Y") as voy_debut, DATE_FORMAT(voy_fin, "%d/%c/%Y") as voy_fin, voy_prix, pho_id, pho_chemin 
+    let sql = `select res_id, Voyage.voy_id, voy_nom, DATE_FORMAT(voy_debut, "%d/%c/%Y") as voy_debut, DATE_FORMAT(voy_fin, "%d/%c/%Y") as voy_fin, voy_prix, pho_id, pho_chemin 
                 from Voyage, Photo_voyage, Reservation 
                 where Voyage.voy_id = Photo_voyage.voy_id 
                 and Voyage.voy_id = Reservation.voy_id 
@@ -202,9 +202,22 @@ function getPanierClientCallback(res, result) {
 }
 
 
+app.get('/api/getCountPanierClient', function (req, res) {
+    console.log('/getCountPanierClient');
 
+    let cli_id = req.query.cli_id || 0;
 
+    let sql = `Select count(*) as count from Reservation where cli_id = ` + cli_id + `;`
 
+    console.log(sql);
+    MariaDB.executeSelect(db, sql, res, getCountPanierClientCallback);
+});
+
+function getCountPanierClientCallback(res, result) {
+    console.log(result);
+
+    res.send(result);
+}
 
 
 
