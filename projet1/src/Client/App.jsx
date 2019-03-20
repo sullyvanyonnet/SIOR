@@ -47,7 +47,7 @@ class App extends Component {
             etatConnexion: etat, //0 si pas connecter sinon id utilisateur
             login: nom
         })
-        // this.forceUpdate()
+        this.AfficheVoyages()
     }
 
     Inscription(test, etat) {
