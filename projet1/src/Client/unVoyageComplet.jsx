@@ -19,7 +19,8 @@ class unVoyageComplet extends React.Component {
             Text: props.Text,
             IdPhoto: "",
             CheminPhoto: props.CheminPhoto,
-            voyages: ""
+            voyages: "",
+            prix:props.prix
         }
 
         this.ChargePhoto = this.ChargePhoto.bind(this)
@@ -81,6 +82,8 @@ class unVoyageComplet extends React.Component {
                                     <h3 class="card-title">{this.state.titre}</h3>
                                     <p class="card-text">Du {this.state.dateDebut} au {this.state.dateFin}</p>
                                     <p class="card-text">{this.state.Text}</p>
+                                    <h3 class="card-title">{this.state.prix}€</h3>
+
                                     <button class="col-sm-3 btn btn-secondary"> réservé </button>
                                 </div>
                     </div>

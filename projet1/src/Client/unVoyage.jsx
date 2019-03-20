@@ -14,7 +14,8 @@ class unVoyage extends React.Component {
             Text: props.Text,
             IdPhoto: "",
             CheminPhoto: props.CheminPhoto,
-            voyages: ""
+            voyages: "",
+            prix:props.prix
         }
         this.handlechange = this.handlechange.bind(this)
 
@@ -35,6 +36,8 @@ class unVoyage extends React.Component {
                         <h3 class="card-title">{this.state.titre}</h3>
                         <p class="card-text">Du {this.state.dateDebut} au {this.state.dateFin}</p>
                         <p class="card-text">{this.state.Text}</p>
+                        <h3 class="card-title">{this.state.prix} € </h3>
+
                     </div>
                 </div>
             </div>
