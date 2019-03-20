@@ -25,7 +25,7 @@ class App extends Component {
     Connection(test, etat, nom) {
         this.setState({
             MessageRetour: test,
-            etatConnexion: etat,
+            etatConnexion: etat, //0 si pas connecter sinon id utilisateur
             login: nom
         })
         // this.forceUpdate()
@@ -87,7 +87,7 @@ class App extends Component {
                     {this.state.MessageRetour}
                 </div>
                 <div className="ListVoyage" id="boutons">
-                    <AfficheVoyages />
+                    <AfficheVoyages EtatConnexion= {this.state.etatConnexion}/>
                 </div>
             </div>
         );
