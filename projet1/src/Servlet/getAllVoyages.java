@@ -61,7 +61,7 @@ public class getAllVoyages extends HttpServlet {
 			
 			Integer voy_id = null;
 			if(v != null) {
-				voy_id = v.getvVoy_id();
+				voy_id = v.getVoy_id();
 			}
 			
 			
