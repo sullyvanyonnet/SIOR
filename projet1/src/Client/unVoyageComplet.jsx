@@ -10,6 +10,7 @@ class unVoyageComplet extends React.Component {
 
     constructor(props) {
         super(props);
+        console.log(props.EtatConnexion);
         this.state = {
             voyageId: props.voyageId,
             JSONVoyage : "",

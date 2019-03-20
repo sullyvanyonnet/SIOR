@@ -9,10 +9,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-import annotation.Id;
-import annotation.Table;
-import bean.Livre;
-import bean.LivreAnnotation;
 
 public class Base {
 	
@@ -39,7 +35,8 @@ public class Base {
 		
 		// connexion BD
 		try  {
-			connection = DriverManager.getConnection(url, user, password);
+			Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			this.connection = DriverManager.getConnection("jdbc:mysql://obiwan2.univ-brest.fr/zfm1-zyonnetsu?user=zyonnetsu&password=1ht7p865");
 		}
 		catch (Exception e) {
 			System.out.println("Erreur connexion "+e.getMessage());
@@ -48,33 +45,6 @@ public class Base {
 	
 	public void fermer() {
 		try {if (connection != null) connection.close();} catch (Exception e) {}
-	}
-
-	public ArrayList<Livre> listerLivres() {
-		
-		ArrayList<Livre> res = new ArrayList<>();
-		
-		String sql = "select * from t_livre";
-		
-		try {
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery();
-			while (rs.next()) {
-				int idLivre = rs.getInt("idLivre");
-				String titre = rs.getString("titre");
-				String auteur = rs.getString("auteur");
-				int annee = rs.getInt("annee");
-				Livre l = new Livre(titre, auteur, annee);
-				l.setIdLivre(idLivre);
-				res.add(l);
-			}
-		}
-		catch (Exception e) {
-			System.out.println(
-					"Erreur listerLivres "+e.getMessage());
-		}
-		
-		return res;
 	}
 	
 	public int enregistrer(String sql)  {
@@ -85,7 +55,8 @@ public class Base {
 			res = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(
-					"Erreur enregistrer "+e.getMessage());
+					"Erreur enregistrer ");
+			e.printStackTrace();
 		}
 
 		return res;

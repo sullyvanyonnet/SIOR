@@ -74,19 +74,15 @@ public class Reservation extends HttpServlet {
 		Integer resultat = null;
 
 		Base base = new Base();
-
-		// STEP 4: Execute a query
-		stmt = conn.createStatement();
-
 		String sql = "INSERT INTO Reservation " + "(cli_id, voy_id)  " + " VALUES (" + cli_id + ", " + voy_id + ");";
-
-		resultat = base.enregistrer(la);
+		
+		resultat = base.enregistrer(sql);
 		System.out.println("Reservation effectuée!");
 
 		ServletOutputStream out = response.getOutputStream();
 		ObjectMapper objectMapper = new ObjectMapper();
 
-		out.write(objectMapper.writeValueAsBytes(resultats));
+		out.write(objectMapper.writeValueAsBytes(resultat));
 		out.close();
 
 	}
