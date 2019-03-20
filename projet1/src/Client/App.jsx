@@ -10,6 +10,7 @@ let ReactBsTable = require('react-bootstrap-table');
 var BootstrapTable = ReactBsTable.BootstrapTable;
 var TableHeaderColumn = ReactBsTable.TableHeaderColumn;
 
+
 class App extends Component {
     constructor(props) {
         super(props);
@@ -19,24 +20,37 @@ class App extends Component {
             MessageRetour: "",
             bouttonHead: "",
             voyage: "",
-            Main:""
+            Main: <AfficheVoyages EtatConnexion="0"/>
         }
         this.Connection = this.Connection.bind(this)
         this.Inscription = this.Inscription.bind(this)
         this.AfficheVoyages = this.AfficheVoyages.bind(this)
         this.Affichepanier = this.Affichepanier.bind(this)
-
+        this.clearMain = this.clearMain.bind(this)
 
     }
 
 
+    clearMain(fonction){
+       delete this.state.Main
+       this.setState(this.state);
+      
+            fonction()
+
+       
+    }
     AfficheVoyages(){
-        this.setState({
-            Main : " "
-        })
+
+ 
+
         this.setState({
             Main : <AfficheVoyages EtatConnexion= {this.state.etatConnexion}/>
         })
+
+
+       this.forceUpdate()
+
+
     }
 
     Affichepanier(){
@@ -67,6 +81,7 @@ class App extends Component {
         let bouttonInscription;
         let bonjoursUser;
         let panier;
+        let accueil = <h2 onClick={() => {this.clearMain(this.AfficheVoyages())}}>accueil</h2>
 
         if (this.state.etatConnexion) {
             bouttonConnexion = <h2   onClick={this.Connection.bind(this, <p>vous etes deco</p>, 0)}>Deconnexion </h2 >;
@@ -88,7 +103,7 @@ class App extends Component {
                 <div className="App-header">
                     <nav class="navbar navbar-dark bg-dark">
                     <div class="nav-item mr-sm-3">
-                        <h2 onClick={() => {this.AfficheVoyages()}}>accueil</h2>
+                    {accueil}
                     </div>
                      <div class="justify-content-end">
                         <div class="nav-item mr-sm-3">

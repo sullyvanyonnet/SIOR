@@ -82,6 +82,13 @@ class unVoyageComplet extends React.Component {
     
 
     render() {
+         let bouton
+        if(this.state.EtatConnexion > 0){
+            bouton = <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.reserve()}}> réservé </button>
+        }else{
+            bouton = <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.reserve()}} disabled> réservé </button>    
+        }
+       
         return (
         <div class="container col-sm-8" >
 
@@ -98,8 +105,8 @@ class unVoyageComplet extends React.Component {
                                     <p class="card-text">Du {this.state.dateDebut} au {this.state.dateFin}</p>
                                     <p class="card-text">{this.state.Text}</p>
                                     <h3 class="card-title">{this.state.prix}€</h3>
-
-                                    <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.reserve()}}> réservé </button>
+                                    {bouton}
+                                    
                                 </div>
             </div>
             <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.props.handler()}} > retour </button>
