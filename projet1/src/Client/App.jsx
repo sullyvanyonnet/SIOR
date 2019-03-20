@@ -5,6 +5,7 @@ import Connection from './connection.jsx';
 import Inscription from './inscription.jsx';
 import AfficheVoyages from './AfficheVoyages.jsx';
 import Panier from './Panier.jsx';
+import axios from 'axios';
 
 let ReactBsTable = require('react-bootstrap-table');
 var BootstrapTable = ReactBsTable.BootstrapTable;
@@ -20,6 +21,7 @@ class App extends Component {
             MessageRetour: "",
             bouttonHead: "",
             voyage: "",
+            nbElement:"",
             Main: <AfficheVoyages EtatConnexion="0"/>
         }
         this.Connection = this.Connection.bind(this)
@@ -65,6 +67,18 @@ class App extends Component {
             etatConnexion: etat, //0 si pas connecter sinon id utilisateur
             login: nom
         })
+        if(etat>0){
+           var data = {
+            'cli_id': etat
+            }
+           /* axios.post('getPanierClient', data)
+            .then(res => {
+                this.setState({
+                    nbElement: JSON.parse(res.data)
+                })
+                
+            });*/
+        }
         this.AfficheVoyages()
     }
 

@@ -1,12 +1,14 @@
 import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
+import axios from 'axios';
 
 class UnPanier extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
+            reservation:props.reservation,
             voyageId: props.voyageId,
             titre: props.titre,
             dateDebut: props.dateDebut,
@@ -18,9 +20,22 @@ class UnPanier extends React.Component {
             prix:props.prix
         }
         this.handlechange = this.handlechange.bind(this)
-
+        this.supprimer=this.supprimer.bind(this)
     }
 
+    supprimer(){
+        var data = {
+            'res_id': this.state.reservation,
+        }
+
+        axios.post('removeReservation', data)
+            .then(res => {
+                this.setState({
+                    JSONVoyages: JSON.parse(res.data)
+                })
+                this.props.handler();
+            });
+    }
     handlechange(event) {
         this.props.handler(this.state.voyageId);
     }
@@ -37,7 +52,7 @@ class UnPanier extends React.Component {
                         <p class="card-text">Du {this.state.dateDebut} au {this.state.dateFin}</p>
                         <p class="card-text">{this.state.Text}</p>
                         <h3 class="card-title">{this.state.prix} € </h3>
-                        <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.reserve()}}> supprimer </button>
+                        <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.supprimer()}}> supprimer </button>
                     </div>
                 </div>
             </div>

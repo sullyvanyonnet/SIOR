@@ -74,6 +74,7 @@ public class removeReservation extends HttpServlet {
 
 		Base base = new Base();
 		String sql = "Delete from Reservation where res_id = " + res_id + ";";
+		System.out.println(sql);
 		
 		resultat = base.enregistrer(sql);
 		System.out.println("Reservation Supprimée!");
