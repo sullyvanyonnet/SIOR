@@ -18,7 +18,7 @@ class unVoyageComplet extends React.Component {
             dateFin: props.dateFin,
             Text: props.Text,
             IdPhoto: "",
-            CheminPhoto: props.CheminPhoto,
+            Photos:"",
             voyages: "",
             prix:props.prix
         }
@@ -37,8 +37,12 @@ class unVoyageComplet extends React.Component {
                 this.setState({
                     JSONVoyage: JSON.parse(res.data)
                 })
-                console.log(this.state.JSONVoyage);
-
+                 this.state.Photos = this.state.JSONVoyage.map((k) =>
+                            <div>
+                                <img src={k.pho_chemin} />
+                            </div>  
+                 );
+                this.forceUpdate()
             });
     }
 
@@ -69,15 +73,7 @@ class unVoyageComplet extends React.Component {
 
            <div class="row">
                        <Carousel>
-                            <div>
-                                <img src={this.state.CheminPhoto} />
-                            </div>
-                            <div>
-                                <img src={this.state.CheminPhoto}/>
-                            </div>
-                            <div>
-                                <img src={this.state.CheminPhoto}/>
-                            </div>
+                            {this.state.Photos}
                         </Carousel>
                                 <div class="card-body">
                                     <h3 class="card-title">{this.state.titre}</h3>
