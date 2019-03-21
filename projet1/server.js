@@ -237,7 +237,7 @@ app.get('/api/confirmePanierClient', function (req, res) {
         "date": "new Date()"
     };
 
-    MongoDB.executeInsertOne("historique", myobj, function (result) {
+    MongoDB.executeInsertOne("historique", myobj, function (ph, result) {
         rows = result;
         console.log(rows);
     });
@@ -245,7 +245,7 @@ app.get('/api/confirmePanierClient', function (req, res) {
     let sql = `Delete from Reservation where res_id = ` + res_id + `;`;
 
     console.log(sql);
-    MariaDB.executeSelect(db, sql, res, confirmePanierClientCallback);
+    MariaDB.executeUpdate(db, sql, res, confirmePanierClientCallback);
 });
 
 function confirmePanierClientCallback(res, result) {
