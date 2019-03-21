@@ -19,6 +19,7 @@ class Panier extends React.Component {
 
         this.getAllVoyages = this.getAllVoyages.bind(this)
         this.handlechange = this.handlechange.bind(this)
+        this.regler =  this.regler.bind(this)
         this.getAllVoyages();
 
     }
@@ -51,20 +52,33 @@ class Panier extends React.Component {
                 this.forceUpdate()
 
             });
-
-
-
-
     }
+    regler() {
+        let data 
+       this.state.JSONVoyages.map((k) =>{
+
+        data = {
+            'cli_id': this.state.EtatConnexion,
+            'res_id': k.res_id,
+            'voy_id': k.voy_id
+        }
+        axios.post('confirmePanierClient', data)
+    }).then(
+           this.getAllVoyages()
+       );
+    }
+
 
     render() {
 
         return (
             <div class="row display-flex">
-            <h1> Voici votre panier : </h1>
+            <h1>  Voici votre panier : </h1>
                 <div class="card-group">
                     {this.state.tableVoyages}
                 </div>
+                <button class="col-sm-3 btn btn-secondary" onClick={()=> {this.regler()}}> regler </button>
+
             </div>
         );
     }
