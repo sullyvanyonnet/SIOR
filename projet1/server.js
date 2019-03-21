@@ -1,12 +1,9 @@
 var fs = require('fs')
 var express = require('express');
-let mongoose = require('mongoose');
-let multer = require('multer');
 
 let mongodb = require("./CRUDs/CRUDMongodb");
 let MariaDB = require("./CRUDs/CRUDMariadb");
 
-let Schema = mongoose.Schema;
 let app = express();
 let port = 9000;
 
@@ -17,13 +14,7 @@ let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// var fic_index = require('os').homedir() + "/tmp_tomcat2/test_reactjs5/build/index.html";
-let fic_index = process.cwd() + "/build/index.html";
 let db = ['zyonnetsu', '1ht7p865', 'zfm1-zyonnetsu', 'obiwan2.univ-brest.fr'];
-
-if (!fs.existsSync(fic_index)) {
-    console.log(fic_index + " not found");
-}
 
 
 app.use(express.static('build'));
@@ -35,12 +26,6 @@ var server = app.listen(port, function () {
     console.log('Express server listening on port ' + port);
 });
 
-
-//Fonctions additionnelles :
-
-/* Fonction CURL pour envoyer une requete POST au serveur : 
-curl -X POST -H 'Content-Type: application/json' -d '{"login": "coco", "password": "coco"}' http://localhost:9000/api/connect
-*/
 
 app.get('/api/connect', (req, res) => {
     console.log('/connect');
