@@ -223,32 +223,39 @@ function getCountPanierClientCallback(res, result) {
 app.get('/api/confirmePanierClient', function (req, res) {
     console.log('/confirmePanierClient');
 
-    let res_id = req.query.res_id || 0;
-    let cli_id = req.query.cli_id || 0;
-    let voy_id = req.query.voy_id || 0;
-
-
-    let MongoDB = new mongodb('obiwan2.univ-brest.fr', 'Assurance');
-    let rows = null;
-    var myobj = {
-        "res_id": res_id,
-        "cli_id": cli_id,
-        "voy_id": voy_id,
-        "date": "new Date()"
-    };
-
-    MongoDB.executeInsertOne("historique", myobj, function (ph, result) {
-        rows = result;
-        console.log(rows);
-    });
+    let res_id = req.query.res_id;
+    let cli_id = req.query.cli_id;
+    let voy_id = req.query.voy_id;
 
     let sql = `Delete from Reservation where res_id = ` + res_id + `;`;
+    let rows = null;
 
     console.log(sql);
-    MariaDB.executeUpdate(db, sql, res, confirmePanierClientCallback);
+    MariaDB.executeUpdate(db, sql, res, function (ph, result) {
+        rows = result;
+
+        //console.log(rows);
+
+        if (rows != null) {
+            let MongoDB = new mongodb('obiwan2.univ-brest.fr', 'SIOR');
+            var myobj = {
+                "res_id": res_id,
+                "cli_id": cli_id,
+                "voy_id": voy_id,
+                "date": new Date()
+            };
+
+            MongoDB.executeInsertOne("historique", myobj, res, confirmePanierClientCallback);
+
+        }
+    });
+
+
+
 });
 
 function confirmePanierClientCallback(res, result) {
+
     console.log(result);
 
     res.send(result);

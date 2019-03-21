@@ -118,7 +118,7 @@ class Inscription extends React.Component {
                         </div>
                         <div class="col-sm-5">
                             <button class="col-sm-3 btn btn-secondary" onClick={this.enregistrer}>
-                                connexion
+                                Confirmer
                         </button>
 
                         </div>
