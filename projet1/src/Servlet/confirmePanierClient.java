@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import manager.Manager;
-import manager.User;
+import manager.Res;
 
 /**
  * Servlet implementation class Accueil
