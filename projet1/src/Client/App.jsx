@@ -22,6 +22,7 @@ class App extends Component {
             bouttonHead: "",
             voyage: "",
             nbElement:"",
+            JSONVoyage:"",
             Main: <AfficheVoyages EtatConnexion="0"/>
         }
         this.Connection = this.Connection.bind(this)
@@ -29,7 +30,7 @@ class App extends Component {
         this.AfficheVoyages = this.AfficheVoyages.bind(this)
         this.Affichepanier = this.Affichepanier.bind(this)
         this.clearMain = this.clearMain.bind(this)
-
+        this.updateCountPanier = this.updateCountPanier.bind(this)
     }
 
 
@@ -46,7 +47,7 @@ class App extends Component {
  
 
         this.setState({
-            Main : <AfficheVoyages EtatConnexion= {this.state.etatConnexion}/>
+            Main : <AfficheVoyages EtatConnexion= {this.state.etatConnexion} updateHeader={this.updateCountPanier}/>
         })
 
 
@@ -57,10 +58,23 @@ class App extends Component {
 
     Affichepanier(){
         this.setState({
-            Main : <Panier EtatConnexion= {this.state.etatConnexion}/>
+            Main : <Panier EtatConnexion= {this.state.etatConnexion} updateHeader={this.updateCountPanier}/>
         })
     }
 
+    updateCountPanier(){
+        var data = {
+            'cli_id': this.state.etatConnexion
+            }
+            axios.post('getCountPanierClient', data)
+            .then(res => {
+                this.setState({
+                    JSONVoyage : JSON.parse(res.data)
+                })
+                this.state.nbElement = this.state.JSONVoyage[0].count 
+            this.forceUpdate()
+        });
+    }
     Connection(test, etat, nom) {
         this.setState({
             MessageRetour: test,
@@ -68,16 +82,7 @@ class App extends Component {
             login: nom
         })
         if(etat>0){
-           var data = {
-            'cli_id': etat
-            }
-           /* axios.post('getPanierClient', data)
-            .then(res => {
-                this.setState({
-                    nbElement: JSON.parse(res.data)
-                })
-                
-            });*/
+           this.updateCountPanier(); 
         }
         this.AfficheVoyages()
     }
@@ -101,7 +106,7 @@ class App extends Component {
             bouttonConnexion = <h2   onClick={this.Connection.bind(this, <p>vous etes deco</p>, 0)}>Deconnexion </h2 >;
             bouttonInscription = "";
             bonjoursUser = <h2 >Bonjour, {this.state.login} </h2 >;
-            panier = <div class="nav-item mr-sm-3 form-group row"> <img class="mr-sm-2" src="./icon/panier.png"  alt="Card image cap" onClick={() => {this.Affichepanier()}}/><h2>0</h2> </div>
+            panier = <div class="nav-item mr-sm-3 form-group row"> <img class="mr-sm-2" src="./icon/panier.png"  alt="Card image cap" onClick={() => {this.Affichepanier()}}/><h2>{this.state.nbElement} </h2> </div>
 
 
         } else {

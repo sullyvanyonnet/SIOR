@@ -61,7 +61,7 @@ class unVoyageComplet extends React.Component {
                 this.setState({
                     JSONVoyage: JSON.parse(res.data)
                 })
-                
+               this.props.updateHeader();
             });
     }
 
